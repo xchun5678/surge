@@ -1,0 +1,6 @@
+# ================= Tradeup 分流规则 =================
+# 建议策略组名：TRADEUP
+
+DOMAIN,tradeupspy.com,TRADEUP
+DOMAIN,cdn.tradeupspy.com,TRADEUP
+DOMAIN-SUFFIX,tradeupspy.com,TRADEUP
