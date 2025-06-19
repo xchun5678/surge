@@ -1,0 +1,15 @@
+# HSBC 分流规则（含 LivePerson 域名）
+DOMAIN-SUFFIX,hsbc.com
+DOMAIN-SUFFIX,hsbc.com.hk
+DOMAIN-SUFFIX,rbwm-api.hsbc.com.hk
+DOMAIN-SUFFIX,retailbank.hsbc.com.hk
+DOMAIN-SUFFIX,mobilex-static.hsbc.com.hk
+DOMAIN-SUFFIX,cdnntm.hsbc.com.hk
+DOMAIN-SUFFIX,cdnbc-wup.hsbc.com.hk
+DOMAIN-SUFFIX,tealiumiq.com
+DOMAIN-SUFFIX,eum-appdynamics.com
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,online-metrix.net
+DOMAIN-SUFFIX,we-stats.com
+DOMAIN-SUFFIX,tiqcdn.com
+DOMAIN,accdn-vip.lpsnmedia.net
