@@ -1,0 +1,4 @@
+# 中银香港 BOCHK 分流规则
+DOMAIN-SUFFIX,bochk.com,BOCHK
+DOMAIN,mb.bochk.com,BOCHK
+DOMAIN,ocs.bochk.com,BOCHK
