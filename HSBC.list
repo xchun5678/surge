@@ -1,23 +1,27 @@
-# HSBC 分流规则（含 LivePerson 域名）
+# HSBC 分流规则（含 LivePerson 与云服务域名）
 
-# 汇丰银行主域名
+# 汇丰主域名
 DOMAIN-SUFFIX,hsbc.com
 DOMAIN-SUFFIX,hsbc.com.hk
 
-# 常见 API 服务域名
+# API 及子服务
 DOMAIN-SUFFIX,rbwm-api.hsbc.com.hk
 DOMAIN-SUFFIX,retailbank.hsbc.com.hk
 DOMAIN-SUFFIX,mobilex-static.hsbc.com.hk
 DOMAIN-SUFFIX,cdnntm.hsbc.com.hk
 DOMAIN-SUFFIX,cdnbc-wup.hsbc.com.hk
 
-# 数据分析与第三方追踪
+# 分析与行为追踪
 DOMAIN-SUFFIX,tealiumiq.com
 DOMAIN-SUFFIX,eum-appdynamics.com
 DOMAIN-SUFFIX,online-metrix.net
 DOMAIN-SUFFIX,we-stats.com
 DOMAIN-SUFFIX,tiqcdn.com
 
-# LivePerson 在线客服平台（推荐使用通配）
+
+# LivePerson 在线客服
 DOMAIN-SUFFIX,liveperson.net
 DOMAIN-SUFFIX,lpsnmedia.net
+
+# API 配置服务域名
+DOMAIN-SUFFIX,vv1865.com
