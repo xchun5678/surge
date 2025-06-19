@@ -1,0 +1,13 @@
+# OKX 直连规则
+2
+DOMAIN-SUFFIX,okx.com,DIRECT
+3
+DOMAIN,static.okx.com,DIRECT
+4
+DOMAIN,wsdexpri.okx.com,DIRECT
+5
+DOMAIN,wspre.okx.com,DIRECT
+6
+DOMAIN,web3.okx.com,DIRECT
+7
+DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net,DIRECT
