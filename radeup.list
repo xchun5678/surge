@@ -1,0 +1,23 @@
+# tradeup.com 分流规则 by 小春
+# 将下列所有域名流量分流至指定策略组（如 PROXY）
+
+DOMAIN-SUFFIX,tradeup.com,PROXY
+DOMAIN,api.tradeup.com,PROXY
+DOMAIN,api-gw.tradeup.com,PROXY
+DOMAIN,bff-mobile.tradeup.com,PROXY
+DOMAIN,community-server-us.tradeup.com,PROXY
+DOMAIN,community-static.tradeup.com,PROXY
+DOMAIN,customer.tradeup.com,PROXY
+DOMAIN,da.tradeup.com,PROXY
+DOMAIN,hq.tradeup.com,PROXY
+DOMAIN,hq-perm.tradeup.com,PROXY
+DOMAIN,live.tradeup.com,PROXY
+DOMAIN,ms-public.tradeup.com,PROXY
+DOMAIN,oauth.tradeup.com,PROXY
+DOMAIN,push.tradeup.com,PROXY
+DOMAIN,push.itradeup.com,PROXY
+DOMAIN,stock-community.tradeup.com,PROXY
+DOMAIN,static.tradeup.com,PROXY
+DOMAIN,tesseract.tradeup.com,PROXY
+DOMAIN,www.tradeup.com,PROXY
+DOMAIN,trade.tradeup.com,PROXY
