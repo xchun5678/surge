@@ -1,0 +1,14 @@
+# Binance 直连规则 by ChatGPT
+DOMAIN-SUFFIX,binance.com,DIRECT
+DOMAIN-SUFFIX,binance.info,DIRECT
+DOMAIN-SUFFIX,binancecnt.com,DIRECT
+DOMAIN-SUFFIX,bnbstatic.com,DIRECT
+DOMAIN,stream.binance.com,DIRECT
+DOMAIN,nbstream.binance.com,DIRECT
+DOMAIN,fstream.binance.com,DIRECT
+DOMAIN,dstream.binance.com,DIRECT
+DOMAIN,themis.binance.com,DIRECT
+DOMAIN,native.binance.com,DIRECT
+DOMAIN,www.binance.com,DIRECT
+DOMAIN,www.binance.info,DIRECT
+DOMAIN,www.binancecnt.com,DIRECT
