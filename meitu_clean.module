@@ -1,0 +1,12 @@
+#!name=美图秀秀去广告
+#!desc=屏蔽美图秀秀广告请求，清爽无干扰体验
+#!author=小春
+
+[Rule]
+DOMAIN,adui.tg.meitu.com,REJECT,extended-matching,pre-matching
+
+[URL Rewrite]
+^https?:\/\/mea\.meitudata\.com\/kaiping - reject
+
+[MITM]
+hostname = %APPEND% mea.meitudata.com
