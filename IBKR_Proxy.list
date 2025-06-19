@@ -1,0 +1,68 @@
+# === IBKR + Zacks + mPulse 代理规则（增强版）by 小春 ===
+2
+# 替换“你的策略组名”为实际使用的代理组名，如 Proxy、IBKR、自动测速
+3
+4
+# === 盈透证券 IBKR 核心服务 ===
+5
+DOMAIN-SUFFIX,ibkr.com,你的策略组名
+6
+DOMAIN-SUFFIX,interactivebrokers.com,你的策略组名
+7
+DOMAIN-SUFFIX,ibllc.com,你的策略组名
+8
+9
+DOMAIN,api.ibkr.com,你的策略组名
+10
+DOMAIN,ibg-api.interactivebrokers.com,你的策略组名
+11
+DOMAIN,nexus.interactivebrokers.com,你的策略组名
+12
+DOMAIN,secure.ibkr.com,你的策略组名
+13
+DOMAIN,cdn.ibkr.com,你的策略组名
+14
+DOMAIN,storage.googleapis.com,你的策略组名
+15
+16
+# 登录/交易系统相关
+17
+DOMAIN,sdc1.ibllc.com,你的策略组名
+18
+DOMAIN,www.interactivebrokers.com,你的策略组名
+19
+DOMAIN,gdcdyn.interactivebrokers.com,你的策略组名
+20
+DOMAIN,clearing.ibkr.com,你的策略组名
+21
+DOMAIN,pdf.ibkr.com,你的策略组名
+22
+DOMAIN,paper.ibkr.com,你的策略组名
+23
+DOMAIN,push.ibkr.com,你的策略组名
+24
+25
+# === Zacks 财经图表/分析平台 ===
+26
+DOMAIN,staticx-tuner.zacks.com,你的策略组名
+27
+DOMAIN-SUFFIX,zacks.com,你的策略组名
+28
+29
+# === Akamai mPulse 性能统计服务（可选设为 REJECT 或 DIRECT） ===
+30
+DOMAIN,c.go-mpulse.net,你的策略组名
+31
+DOMAIN-SUFFIX,go-mpulse.net,你的策略组名
+￼
+￼
+￼
+Comment
+Write
+Preview
+￼
+￼
+￼
+￼
+￼
+￼
