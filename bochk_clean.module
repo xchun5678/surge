@@ -1,0 +1,17 @@
+[Module]
+title = "BOCHK 去广告增强"
+description = "去除中国银行 App（BOCHK）广告域名"
+author = 小春（@xchun5678）
+version = 1.0.0
+update-url = https://raw.githubusercontent.com/xchun5678/surge/main/module/bochk_clean.module
+website = https://github.com/xchun5678/surge
+
+[Rule]
+DOMAIN-SUFFIX,adsdk.bochk.com,REJECT
+DOMAIN-SUFFIX,tracking.bochk.com,REJECT
+DOMAIN-SUFFIX,analytics.bochk.com,REJECT
+DOMAIN-SUFFIX,log.bochk.com,REJECT
+DOMAIN-SUFFIX,adimg.bochk.com,REJECT
+DOMAIN-SUFFIX,mobads.bochk.com,REJECT
+DOMAIN-SUFFIX,bochk-ad.banking.com,REJECT
+DOMAIN-SUFFIX,cdn-ad.bochk.com,REJECT
