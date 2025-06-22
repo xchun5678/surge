@@ -36,6 +36,17 @@
 | 📶 中国移动广告屏蔽模块 | 拦截弹窗与推荐内容 | `https://raw.githubusercontent.com/xchun5678/surge/main/yidong_mobile` |
 
 ---
+## 🚀 我的 Surge 最终优化配置文件（适配 iPhone 16 Pro Max / iOS 26）
+
+点击查看配置详情 👉 [Surge-xchun.conf](https://github.com/xchun5678/surge/blob/main/Surge-xchun.conf)
+
+📌 该配置涵盖：
+- 🔧 高性能网络设置（TUN、DoH、QUIC、兼容模式等）
+- 🎯 多策略分流支持（AI、金融、游戏、银行模块全覆盖）
+- 🔐 安全与隐私强化（证书固定、QUIC 控制、IP 反查阻断等）
+- 📱 深度适配 iOS 18 / Surge 5.100.0 / 中国大陆网络环境
+
+配置内容自动托管，支持长期使用与分享。
 
 ## 🧠 作者
 
