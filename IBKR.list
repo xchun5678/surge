@@ -1,4 +1,4 @@
-# === IBKR + Zacks + mPulse 代理规则（增强版）by 小春 ===
+# === IBKR + Zacks + mPulse 代理规则（简化版）by 小春 ===
 # 替换“IBKR”为实际使用的代理组名，如 Proxy、IBKR、自动测速
 
 # === 盈透证券 IBKR 核心服务 ===
@@ -6,26 +6,8 @@ DOMAIN-SUFFIX,ibkr.com,IBKR
 DOMAIN-SUFFIX,interactivebrokers.com,IBKR
 DOMAIN-SUFFIX,ibllc.com,IBKR
 
-DOMAIN,api.ibkr.com,IBKR
-DOMAIN,ibg-api.interactivebrokers.com,IBKR
-DOMAIN,nexus.interactivebrokers.com,IBKR
-DOMAIN,secure.ibkr.com,IBKR
-DOMAIN,cdn.ibkr.com,IBKR
-DOMAIN,storage.googleapis.com,IBKR
-
-# 登录/交易系统相关
-DOMAIN,sdc1.ibllc.com,IBKR
-DOMAIN,www.interactivebrokers.com,IBKR
-DOMAIN,gdcdyn.interactivebrokers.com,IBKR
-DOMAIN,clearing.ibkr.com,IBKR
-DOMAIN,pdf.ibkr.com,IBKR
-DOMAIN,paper.ibkr.com,IBKR
-DOMAIN,push.ibkr.com,IBKR
-
 # === Zacks 财经图表/分析平台 ===
-DOMAIN,staticx-tuner.zacks.com,IBKR
 DOMAIN-SUFFIX,zacks.com,IBKR
 
 # === Akamai mPulse 性能统计服务（可选设为 REJECT 或 DIRECT） ===
-DOMAIN,c.go-mpulse.net,IBKR
 DOMAIN-SUFFIX,go-mpulse.net,IBKR
