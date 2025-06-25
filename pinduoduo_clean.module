@@ -1,0 +1,20 @@
+#!name=拼多多去广告修正版
+#!desc=屏蔽拼多多广告，保留核心功能，解决“网络不太顺畅”等加载异常问题
+#!author=xchun5678
+#!homepage=https://github.com/xchun5678/surge
+
+[URL-REGEX]
+^https?:\/\/mob\.pddpic\.com\/mob-ad\/.*$ = reject
+^https?:\/\/.*pinduoduo\.com\/api\/ad\/.*$ = reject
+^https?:\/\/.*pinduoduo\.com\/.*\/ad\/.*$ = reject
+^https?:\/\/.*pinduoduo\.com\/advert\/.*$ = reject
+^https?:\/\/.*pinduoduo\.com\/network\/api\/hotwords = reject
+^https?:\/\/.*pinduoduo\.com\/search\/api\/.*\/guess = reject
+^https?:\/\/.*pinduoduo\.com\/search\/api\/.*\/search\/.* = reject
+^http:\/\/114\.110\.97\.97\/d.*$ = direct
+
+[URL-REWRITE]
+^https?:\/\/mob\.pddpic\.com\/mob-ad\/.*$ - reject
+
+[MITM]
+hostname = *.pinduoduo.com, *.pddpic.com
