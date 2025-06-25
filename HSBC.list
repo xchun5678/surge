@@ -4,13 +4,6 @@
 DOMAIN-SUFFIX,hsbc.com
 DOMAIN-SUFFIX,hsbc.com.hk
 
-# API 及子服务
-DOMAIN-SUFFIX,rbwm-api.hsbc.com.hk
-DOMAIN-SUFFIX,retailbank.hsbc.com.hk
-DOMAIN-SUFFIX,mobilex-static.hsbc.com.hk
-DOMAIN-SUFFIX,cdnntm.hsbc.com.hk
-DOMAIN-SUFFIX,cdnbc-wup.hsbc.com.hk
-
 # 分析与行为追踪
 DOMAIN-SUFFIX,tealiumiq.com
 DOMAIN-SUFFIX,eum-appdynamics.com
