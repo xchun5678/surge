@@ -1,31 +1,23 @@
-#!name=百度地图去广告优化版（保留足迹）
-#!desc=移除百度地图首页顶部广告及弹窗广告，保留足迹和基础功能
-#!author=OpenAI ChatGPT 优化
-#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/BaiduMap.png
-#!category=CleanModule
-#!openUrl=https://apps.apple.com/app/id452186370
-#!tag=去广告
-#!loon_version=3.2.4(787)
-#!homepage=https://github.com
-#!date=2025-06-17 04:25:00
+#!name=百度地图去广告
+#!desc=优化启动广告和部分 UI 栏位，保留地图功能与足迹
+#!author=xchun5678
+#!homepage=https://github.com/xchun5678/surge
 
-[Body Rewrite]
-# 删除顶部广告
-http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/feed\/govui\/rich_content delpaths(["data"])
-# 删除顶部弹窗通知广告
-http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/client\/noticebar\/get\? delpaths(["content","multi_data"])
-# 删除明显的推广广告（精准匹配，不影响基础功能）
-http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/client\/phpui2\/\?qt=ads&type=user_home_new_service delpaths(["ads"])
-# 精确去除周边页推广卡片（如果不需要可自行删除）
-http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/living\/nearby\/api\? delpaths(["Result","cards",1])
-# 保留足迹、常用地址，不干扰数据结构
-http-response-jq ^https:\/\/newclient\.map\.baidu\.com\/usersystem\/mine\/page\? delpaths([])
+[Script]
+# 屏蔽启动广告
+http-response ^https?:\/\/afd\.baidu\.com\/afd\/entry$ requires-body=1,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/script/baidu_map_adblock.js,tag=百度地图启动广告
 
-[Map Local]
-# 移除明显广告弹窗、广告资源请求
-^https:\/\/afd\.baidu\.com\/afd\/entry\?action=(update|query) data-type=text data="{}" status-code=200
-^https:\/\/yongche\.baidu\.com\/gomarketing\/api\/popup\/getentrancecordovaurl$ data-type=text data="{}" status-code=200
-^https:\/\/ecom\.map\.baidu\.com\/ad-ops\/afd\/popup\? data-type=text data="{}" status-code=200
+[Rule]
+# 保留主功能服务
+DOMAIN-SUFFIX,baidu.com,DIRECT
+DOMAIN-SUFFIX,bdimg.com,DIRECT
+DOMAIN-SUFFIX,bdstatic.com,DIRECT
+
+# 屏蔽广告子域（非功能必要）
+DOMAIN-SUFFIX,afd.baidu.com,REJECT
+DOMAIN-SUFFIX,mobads.baidu.com,REJECT
+DOMAIN-SUFFIX,pos.baidu.com,REJECT
+DOMAIN-KEYWORD,ads,REJECT
 
 [MITM]
-hostname = %APPEND% newclient.map.baidu.com, afd.baidu.com, yongche.baidu.com, ecom.map.baidu.com
+hostname = *.baidu.com
