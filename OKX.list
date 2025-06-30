@@ -1,12 +1,9 @@
-# > 欧易 OKX 分流（增强）
-DOMAIN-SUFFIX,okx.com,Proxy,extended-matching
-DOMAIN-SUFFIX,okex.com,Proxy,extended-matching
-DOMAIN-SUFFIX,okcoin.com,Proxy,extended-matching
-DOMAIN-SUFFIX,oklink.com,Proxy,extended-matching
-DOMAIN-SUFFIX,okx-dns.com,Proxy,extended-matching
-DOMAIN-SUFFIX,cnouyi.pizza,Proxy,extended-matching
-
-# CDN 相关
-DOMAIN-KEYWORD,okx.com.cdn.cloudflare.net,Proxy,extended-matching
-DOMAIN-KEYWORD,cloudfront.net,Proxy,extended-matching
-DOMAIN-SUFFIX,cloudflare-dns.com,Proxy,extended-matching
+# > 欧易 OKX / OKCoin / OKLink 分流规则
+# 含 cloudflare + okx.com 及相关域名
+DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net
+DOMAIN-SUFFIX,cloudfront.net
+DOMAIN-SUFFIX,cnouyi.pizza
+DOMAIN-SUFFIX,okcoin.com
+DOMAIN-SUFFIX,okx.com
+DOMAIN-SUFFIX,okex.com
+DOMAIN-SUFFIX,oklink.com
