@@ -1,3 +1,11 @@
-# OKX 直连规则
-DOMAIN-SUFFIX,okx.com,OKX
-DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net,OKX
+# NAME: OKX
+# AUTHOR: xchun5678
+# REPO: https://github.com/xchun5678/surge
+# UPDATED: 2025-06-30 19:30:00
+# DOMAIN-SUFFIX: 4
+# TOTAL: 4
+
+DOMAIN-SUFFIX,okx.com
+DOMAIN-SUFFIX,okex.com
+DOMAIN-SUFFIX,oklink.com
+DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net
