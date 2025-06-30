@@ -1,11 +1,16 @@
 # NAME: OKX
 # AUTHOR: xchun5678
 # REPO: https://github.com/xchun5678/surge
-# UPDATED: 2025-06-30 19:30:00
-# DOMAIN-SUFFIX: 4
-# TOTAL: 4
+# UPDATED: 2025-06-30 20:00:00
+# DOMAIN-SUFFIX: 9
+# TOTAL: 9
 
 DOMAIN-SUFFIX,okx.com
 DOMAIN-SUFFIX,okex.com
 DOMAIN-SUFFIX,oklink.com
+DOMAIN-SUFFIX,static.okx.com
+DOMAIN-SUFFIX,www.okx.com
 DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net
+DOMAIN-SUFFIX,cloudflare-dns.com
+DOMAIN-SUFFIX,cdn.okx.com
+DOMAIN-SUFFIX,wspri.okx.com.cdn.cloudflare.net
