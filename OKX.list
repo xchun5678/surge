@@ -1,16 +1,12 @@
-# NAME: OKX
-# AUTHOR: xchun5678
-# REPO: https://github.com/xchun5678/surge
-# UPDATED: 2025-06-30 20:00:00
-# DOMAIN-SUFFIX: 9
-# TOTAL: 9
+# > 欧易 OKX 分流（增强）
+DOMAIN-SUFFIX,okx.com,Proxy,extended-matching
+DOMAIN-SUFFIX,okex.com,Proxy,extended-matching
+DOMAIN-SUFFIX,okcoin.com,Proxy,extended-matching
+DOMAIN-SUFFIX,oklink.com,Proxy,extended-matching
+DOMAIN-SUFFIX,okx-dns.com,Proxy,extended-matching
+DOMAIN-SUFFIX,cnouyi.pizza,Proxy,extended-matching
 
-DOMAIN-SUFFIX,okx.com
-DOMAIN-SUFFIX,okex.com
-DOMAIN-SUFFIX,oklink.com
-DOMAIN-SUFFIX,static.okx.com
-DOMAIN-SUFFIX,www.okx.com
-DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net
-DOMAIN-SUFFIX,cloudflare-dns.com
-DOMAIN-SUFFIX,cdn.okx.com
-DOMAIN-SUFFIX,wspri.okx.com.cdn.cloudflare.net
+# CDN 相关
+DOMAIN-KEYWORD,okx.com.cdn.cloudflare.net,Proxy,extended-matching
+DOMAIN-KEYWORD,cloudfront.net,Proxy,extended-matching
+DOMAIN-SUFFIX,cloudflare-dns.com,Proxy,extended-matching
