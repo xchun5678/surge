@@ -1,5 +1,5 @@
-# NAME: Kelee AI Rules (Surge Converted)
-# DESCRIPTION: Converted from kelee.one/Tool/Loon/Lsr/AI.lsr
+# NAME: Kelee AI Rules (Surge Version)
+# DESCRIPTION: Converted for Surge. Includes OpenAI, Claude, Google, Microsoft, etc.
 # UPDATED: 2025-12-30
 
 # > OpenAI & ChatGPT
@@ -59,7 +59,7 @@ DOMAIN-SUFFIX,pplx.ai
 # > Midjourney
 DOMAIN-SUFFIX,midjourney.com
 
-# > Other AI Services
+# > Other AI Services (Grok, Poe, HuggingFace, etc.)
 DOMAIN-SUFFIX,civitai.com
 DOMAIN-SUFFIX,huggingface.co
 DOMAIN-SUFFIX,x.ai
