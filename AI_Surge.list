@@ -1,0 +1,68 @@
+# NAME: Kelee AI Rules (Surge Converted)
+# DESCRIPTION: Converted from kelee.one/Tool/Loon/Lsr/AI.lsr
+# UPDATED: 2025-12-30
+
+# > OpenAI & ChatGPT
+DOMAIN,chat.openai.com.cdn.cloudflare.net
+DOMAIN,openai-api.arkoselabs.com
+DOMAIN,browser-intake-datadoghq.com
+DOMAIN,static.cloudflareinsights.com
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,ai.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,identrust.com
+DOMAIN-SUFFIX,auth0.com
+DOMAIN-SUFFIX,arkoselabs.com
+DOMAIN-SUFFIX,featuregates.org
+DOMAIN-SUFFIX,statsigapi.net
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN-SUFFIX,launchdarkly.com
+DOMAIN-SUFFIX,sentry.io
+DOMAIN-SUFFIX,stripe.com
+DOMAIN-KEYWORD,openai
+DOMAIN-KEYWORD,chatgpt
+
+# > Anthropic (Claude)
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN,cdn.usefathom.com
+
+# > Google AI (Gemini/Bard)
+DOMAIN,ai.google.dev
+DOMAIN,makersuite.google.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+
+# > Microsoft Copilot & Bing AI
+DOMAIN,copilot.microsoft.com
+DOMAIN,sydney.bing.com
+DOMAIN,www.bing.com
+DOMAIN,edgeservices.bing.com
+DOMAIN-SUFFIX,bing-shopping.microsoft-falcon.io
+DOMAIN-SUFFIX,api.microsoftapp.net
+
+# > Meta AI
+DOMAIN-SUFFIX,meta.ai
+
+# > Perplexity
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,pplx.ai
+
+# > Midjourney
+DOMAIN-SUFFIX,midjourney.com
+
+# > Other AI Services
+DOMAIN-SUFFIX,civitai.com
+DOMAIN-SUFFIX,huggingface.co
+DOMAIN-SUFFIX,x.ai
+DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,poe.com
+DOMAIN-SUFFIX,quora.com
