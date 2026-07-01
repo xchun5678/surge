@@ -1,0 +1,17 @@
+#!name=小红书/RedNote 去广告及增强(自定义融合版)
+#!desc=融合海外版(RedNote)核心广告拦截与解密，同时保留 fmz200 的功能脚本(支持评论区无水印保存等)。
+#!category=去广告
+
+[URL Rewrite]
+# 1. 拦截国内/海外版开屏广告配置请求 (基于最新测试版)
+^https?:\/\/api\.(xiaohongshu|rednotetec)\.com\/api\/sns\/v\d\/system_service\/splash_config - reject
+# 2. 移除启动页特殊广告、赞助商下发
+^https?:\/\/api\.(xiaohongshu|rednotetec)\.com\/api\/sns\/v\d\/ads\/ - reject
+
+[Script]
+# 3. 核心脚本：使用 fmz200 的脚本路径(保证去水印/保存功能生效)，同时正则完美匹配国内与海外版域名
+小红书去广告增强 = type=http-response, pattern=^https?:\/\/api\.(xiaohongshu|rednotetec)\.com\/api\/sns\/v\d\/(homefeed|feed|search\/trending|search\/hint|notes\/reporter), script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/xiaohongshu/xiaohongshu.js, requires-body=true, timeout=30
+
+[MITM]
+# 4. 补齐海外版专属的全部核心及辅助解密域名，确保海外版流量能顺利走过 fmz200 的脚本
+hostname = %APPEND% api.xiaohongshu.com, api.rednotetec.com, *.rednotetec.com, api.shanghaiwansha.com
