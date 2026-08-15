@@ -7,5 +7,5 @@
 interface = 127.0.0.1
 port = 5753
 secret = abcdef0123456789abcdef0123456789
-ipv6 = false
+ipv6 = true
 dc-config-url = https://github.com/Repcz/Tool/raw/X/Surge/mtproto-dc-config.json
