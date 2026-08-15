@@ -1,0 +1,14 @@
+#!name=规则优化(防循环+TestFlight+规则修正)
+#!desc=借鉴 Lucky 配置的高价值优化: 1. 防应用循环请求 2. TestFlight 直连解析 3. 规则修正规则集(Unbreak)
+#!author=xchun5678
+#!homepage=https://github.com/xchun5678/surge
+
+[Rule]
+# 防止应用循环请求(拦截无效地址 0.0.0.0, 避免 App 卡顿/耗电)
+IP-CIDR,0.0.0.0/32,REJECT,no-resolve
+# 规则修正: 修正常被误判的域名, 强制直连(解决莫名连不上的问题)
+RULE-SET,https://raw.githubusercontent.com/Centralmatrix3/Matrix-io/master/Surge/Ruleset/Unbreak.list,DIRECT
+
+[Host]
+# Apple TestFlight 直连解析(加速 TF 使用)
+*testflight.apple.com = server:8.8.4.4
