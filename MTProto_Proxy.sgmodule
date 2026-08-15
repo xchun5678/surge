@@ -1,0 +1,17 @@
+#!name=MTProto 代理 (Telegram)
+#!desc=MTProto 代理模块，支持 Telegram 加速。请自行替换 secret 为你的真实密钥。
+#!author=xchun5678
+#!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Telegram_05.png
+#!system=ios, mac
+
+[MTProto]
+# 监听地址（127.0.0.1 仅本地；0.0.0.0 可局域网共享）
+interface = 127.0.0.1
+# 监听端口（Telegram 客户端填此端口）
+port = 5753
+# 32 位十六进制 secret（重要：替换为你的真实密钥）
+secret = abcdef0123456789abcdef0123456789
+# 是否启用 IPv6
+ipv6 = false
+# DC 配置 URL（可选，用于自定义 Telegram DC 信息）
+dc-config-url = https://github.com/Repcz/Tool/raw/X/Surge/mtproto-dc-config.json
