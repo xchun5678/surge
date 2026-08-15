@@ -1,0 +1,15 @@
+#!name=MTProto 代理 (Telegram)
+#!desc=通过 MTProto 协议提供 Telegram 代理服务，监听本机指定端口。可配合 Telegram 客户端配置自定义代理使用。
+#!author=xchun5678
+#!system=ios, mac
+
+[MTProto]
+# 本地监听地址，Telegram 会连接到这个地址的指定端口作为代理
+# interface 保持 127.0.0.1 通常即可；如需局域网共享可改为 0.0.0.0 并注意安全
+interface = 127.0.0.1
+port = 5753
+# 你的 MTProto 服务端 secret —— 重要：请替换为你自己的真实密钥后再使用！
+# secret 格式为 32 位十六进制字符串（如 abcdef0123456789abcdef0123456789）
+secret = abcdef0123456789abcdef0123456789
+# 是否监听 IPv6
+ipv6 = false
