@@ -1,9 +1,0 @@
-# > 欧易 OKX / OKCoin / OKLink 分流规则
-# 含 cloudflare + okx.com 及相关域名
-DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net
-DOMAIN-SUFFIX,cloudfront.net
-DOMAIN-SUFFIX,cnouyi.pizza
-DOMAIN-SUFFIX,okcoin.com
-DOMAIN-SUFFIX,okx.com
-DOMAIN-SUFFIX,okex.com
-DOMAIN-SUFFIX,oklink.com
