@@ -1,0 +1,31 @@
+#!name=小红书/RedNote 去水印去广告(增强版)
+#!desc=海外版 RedNote 去水印去广告增强。在原 RedPaper 基础上扩展全部评论/图片/笔记接口版本覆盖，最大化去水印生效概率。
+#!author=xchun5678
+#!homepage=https://github.com/xchun5678/surge
+
+[Rule]
+# 屏蔽 QUIC 让红书走可处理的 HTTP 代理
+AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,rnote.com)),REJECT
+AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,xhscdn.com)),REJECT
+
+[Script]
+# ===== 去水印(保留原 RedPaper 全部能力) =====
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除图片和实况照片水印,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/note\/(?:imagefeed|live_photo\/save)(\?|$)
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除整体配置 ui,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/system\/service\/ui\/config\?
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除开屏广告 config,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/system_service\/config\?
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除开屏广告 splash_config,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v2\/system_service\/splash_config
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除详情页小部件、关注页感兴趣的人,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v2\/(?:note\/widgets|user\/followings\/followfeed)
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除信息流广告,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v4\/followfeed\?
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除详情页感兴趣的人,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v5\/recommend\/user\/follow_recommend\?
+# ===== 评论区图片/实况照水印(扩展全版本覆盖) =====
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除评论区实况照片水印,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/(?:interaction\/comment\/video\/download|interaction\/comment\/image\/list|interaction\/comment\/detail)
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除评论区图片水印(list),type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v[1-9]\/note\/comment\/(?:list|detail|child)
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除评论区图片水印(v8全量),type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v(?:5|6|7|8|9|10)\/note\/comment\/list
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除笔记图片水印(全版本),type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v[1-9]\/note\/(?:feed|imagefeed|live_photo\/save|videofeed|video\/save)
+# ===== 广告(保留) =====
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除信息流广告,type=http-response,pattern=^https:\/\/(?:edith|rec)\.rnote\.com\/api\/sns\/v6\/homefeed\?
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除搜索页广告,type=http-response,pattern=^https:\/\/(?:edith|so)\.rnote\.com\/api\/sns\/v10\/search\/notes\?
+RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除视频水印,type=http-response,pattern=^https:\/\/(?:edith|rec|www)\.rnote\.com\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save)
+
+[MITM]
+hostname = %APPEND% ci.xiaohongshu.com, edith.rnote.com, rec.rnote.com, so.rnote.com, www.rnote.com, music.rnote.com
