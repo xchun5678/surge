@@ -12,9 +12,9 @@ AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,xiaohongshu.com)),REJECT
 [Script]
 # ===== 评论区图片 URL 去水印（新增，解决评论区水印） =====
 # 评论区列表/详情
-xhs_comment_clean = script-path=https://raw.githubusercontent.com/xchun5678/surge/main/Scripts/xiaohongshu_clean.js,requires-body=true,max-size=-1,tag=评论区图片去水印(全版本),type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v[0-9]+\/note\/comment\/(?:list|detail|child)
+xhs_comment_clean = script-path=https://raw.githubusercontent.com/xchun5678/surge/main/xiaohongshu_clean.js,requires-body=true,max-size=-1,tag=评论区图片去水印(全版本),type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v[0-9]+\/note\/comment\/(?:list|detail|child)
 # 图片私信评论区接口
-xhs_comment_clean = script-path=https://raw.githubusercontent.com/xchun5678/surge/main/Scripts/xiaohongshu_clean.js,requires-body=true,max-size=-1,tag=图片接口去水印,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v[0-9]+\/(?:note\/feed|imagefeed|note\/detail|discovery\/detail)
+xhs_comment_clean = script-path=https://raw.githubusercontent.com/xchun5678/surge/main/xiaohongshu_clean.js,requires-body=true,max-size=-1,tag=图片接口去水印,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v[0-9]+\/(?:note\/feed|imagefeed|note\/detail|discovery\/detail)
 
 # ===== 原 RedPaper 去广告/去水印(保留) =====
 RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除图片和实况照片水印,type=http-response,pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/note\/(?:imagefeed|live_photo\/save)(\?|$)
