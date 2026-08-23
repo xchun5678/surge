@@ -1,0 +1,9 @@
+# NAME: Douyin Direct
+# DESC: Douyin domestic direct connect
+# AUTHOR: xchun5678
+
+DOMAIN-SUFFIX,douyin.com
+DOMAIN-SUFFIX,douyinpic.com
+DOMAIN-SUFFIX,douyinvod.com
+DOMAIN-SUFFIX,douyincc.com
+DOMAIN-SUFFIX,douyinq.com
