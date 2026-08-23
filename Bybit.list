@@ -1,20 +1,11 @@
-# NAME: Bybit 规则集
-# DESCRIPTION: Bybit 加密货币交易所域名分流（基于实际抓包 + 官方域名）
+# NAME: Bybit
+# DESC: Bybit domains, use DIRECT
 # AUTHOR: xchun5678
-# 策略: 由引用方决定（可走代理/直连，一般走代理）
-# 抓包来源: Surge 实际请求
 
-# 主站 / App 前端
 DOMAIN-SUFFIX,bybit.com
 DOMAIN-SUFFIX,bybit.com.cn
-
-# API 服务（免服务器区域）
 DOMAIN-SUFFIX,bybit.biz
 DOMAIN-SUFFIX,bytick.com
-
-# 静态资源 / 数据
 DOMAIN-SUFFIX,bycsi.com
 DOMAIN-SUFFIX,ng-dex.com
-
-# 相关镜像 / 域名变体
 DOMAIN-SUFFIX,bybit.org
