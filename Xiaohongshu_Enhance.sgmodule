@@ -4,9 +4,15 @@
 #!homepage=https://github.com/xchun5678/surge
 
 [Rule]
-# 屏蔽 QUIC 让红书走可处理的 HTTP 代理
+# 屏蔽 QUIC 让红书走可处理的 HTTP
 AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,rnote.com)),REJECT
 AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,xhscdn.com)),REJECT
+AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,rednotecan.com)),REJECT
+# 红书 CDN 直连（避免走代理，保证可 MITM 处理）
+DOMAIN-SUFFIX,rednotecan.com,DIRECT
+DOMAIN-SUFFIX,xhscdn.com,DIRECT
+DOMAIN-SUFFIX,rnote.com,DIRECT
+DOMAIN-SUFFIX,xiaohongshu.com,DIRECT
 
 [Script]
 # ===== 去水印(保留原 RedPaper 全部能力) =====
@@ -28,4 +34,4 @@ RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPa
 RedPaper_remove_ads.js = script-path=https://kelee.one/Resource/JavaScript/RedPaper/RedPaper_remove_ads.js,requires-body=true,tag=移除视频水印,type=http-response,pattern=^https:\/\/(?:edith|rec|www)\.rnote\.com\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save)
 
 [MITM]
-hostname = %APPEND% ci.xiaohongshu.com, edith.rnote.com, rec.rnote.com, so.rnote.com, www.rnote.com, music.rnote.com
+hostname = %APPEND% ci.xiaohongshu.com, edith.rnote.com, rec.rnote.com, so.rnote.com, www.rnote.com, music.rnote.com, *.xhscdn.com, *.rednotecan.com, fe-resource-app.rnote.com
