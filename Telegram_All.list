@@ -29,7 +29,6 @@ DOMAIN-SUFFIX,telegramdownload.com
 DOMAIN-SUFFIX,telesco.pe
 DOMAIN-SUFFIX,tg.dev
 DOMAIN-SUFFIX,tx.me
-DOMAIN-SUFFIX,usercontent.dev
 # --- DOMAIN-KEYWORD ---
 DOMAIN-KEYWORD,nicegram
 # --- IP-CIDR (Telegram 服务器) ---
