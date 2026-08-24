@@ -1,0 +1,23 @@
+# NAME: Gemini
+# DESCRIPTION: Google Gemini / AI 服务独立规则集（B7 Gemini + AIGC 内 Gemini 域名全量）
+# AUTHOR: xchun5678
+
+DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,gemini.google
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,generativelanguage.googleapis.com
+DOMAIN-SUFFIX,makersuite.google.com
+DOMAIN-SUFFIX,notebooklm.google
+DOMAIN-SUFFIX,notebooklm.google.com
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,makersuite.google.com
+DOMAIN-KEYWORD,colab
+DOMAIN-KEYWORD,generativelanguage
+DOMAIN,ai.google.dev
+DOMAIN-SUFFIX,apis.google.com
+DOMAIN-KEYWORD,developerprofiles
