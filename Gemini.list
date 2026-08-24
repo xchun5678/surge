@@ -1,5 +1,5 @@
 # NAME: Gemini
-# DESCRIPTION: Google Gemini / AI 服务独立规则集（B7 Gemini + AIGC 内 Gemini 域名全量）
+# DESCRIPTION: Google Gemini / AI 服务独立规则集
 # AUTHOR: xchun5678
 
 DOMAIN-SUFFIX,aistudio.google.com
