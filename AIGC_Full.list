@@ -1,5 +1,5 @@
 # NAME: AIGC 完整版
-# DESCRIPTION: AI 服务完整分流（AIGC + OpenAI + Claude + Gemini 全量合并）
+# DESCRIPTION: AI 服务完整分流（AIGC + OpenAI + Claude 全量，Gemini 见 Gemini.list）
 # AUTHOR: xchun5678
 
 # ===== AI 服务全量 =====
@@ -28,7 +28,6 @@ DOMAIN,robinfrontend-pa.googleapis.com
 DOMAIN,servd-anthropic-website.b-cdn.net
 DOMAIN-SUFFIX,ai.com
 DOMAIN-SUFFIX,aicode.googleapis.com
-DOMAIN-SUFFIX,aistudio.google.com
 DOMAIN-SUFFIX,algolia.net
 DOMAIN-SUFFIX,android.chat.openai.com
 DOMAIN-SUFFIX,anthropic.com
@@ -38,7 +37,6 @@ DOMAIN-SUFFIX,app.launchdarkly.com
 DOMAIN-SUFFIX,auth.openai.com
 DOMAIN-SUFFIX,auth0.com
 DOMAIN-SUFFIX,auth0.openai.com
-DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,cdn.workos.com
 DOMAIN-SUFFIX,chat.com
 DOMAIN-SUFFIX,chat.openai.com
@@ -57,8 +55,6 @@ DOMAIN-SUFFIX,clientstream.launchdarkly.com
 DOMAIN-SUFFIX,clipdrop.co
 DOMAIN-SUFFIX,cloudcode-pa.googleapis.com
 DOMAIN-SUFFIX,ct.sendgrid.net
-DOMAIN-SUFFIX,deepmind.com
-DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,desktop.chat.openai.com
 DOMAIN-SUFFIX,dify.ai
 DOMAIN-SUFFIX,events.launchdarkly.com
@@ -69,10 +65,6 @@ DOMAIN-SUFFIX,firebaseinstallations.googleapis.com
 DOMAIN-SUFFIX,forwarder.workos.com
 DOMAIN-SUFFIX,g.ai
 DOMAIN-SUFFIX,geller-pa.googleapis.com
-DOMAIN-SUFFIX,gemini.google
-DOMAIN-SUFFIX,gemini.google.com
-DOMAIN-SUFFIX,generativeai.google
-DOMAIN-SUFFIX,generativelanguage.googleapis.com
 DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,groq.com
 DOMAIN-SUFFIX,host.livekit.cloud
@@ -85,10 +77,7 @@ DOMAIN-SUFFIX,jasper.ai
 DOMAIN-SUFFIX,js.intercomcdn.com
 DOMAIN-SUFFIX,js.stripe.com
 DOMAIN-SUFFIX,launchdarkly.com
-DOMAIN-SUFFIX,makersuite.google.com
 DOMAIN-SUFFIX,meta.ai
-DOMAIN-SUFFIX,notebooklm.google
-DOMAIN-SUFFIX,notebooklm.google.com
 DOMAIN-SUFFIX,o207216.ingest.sentry.io
 DOMAIN-SUFFIX,o33249.ingest.sentry.io
 DOMAIN-SUFFIX,oaistatic.com
@@ -101,7 +90,6 @@ DOMAIN-SUFFIX,openart.ai
 DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,poe.com
 DOMAIN-SUFFIX,pool.ntp.org
-DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
 DOMAIN-SUFFIX,prodregistryv2.org
 DOMAIN-SUFFIX,rum.browser-intake-datadoghq.com
 DOMAIN-SUFFIX,segment.io
@@ -133,9 +121,4 @@ DOMAIN-SUFFIX, smoot.apple.com
 DOMAIN-SUFFIX, apple-relay.akamaized.net
 DOMAIN-SUFFIX, apple-relay.mask.apple-dns.net
 DOMAIN-KEYWORD,openai
-DOMAIN,alkalimakersuite-pa.clients6.google.com
-DOMAIN,makersuite.google.com
 DOMAIN-SUFFIX,apis.google.com
-DOMAIN-KEYWORD,colab
-DOMAIN-KEYWORD,developerprofiles
-DOMAIN-KEYWORD,generativelanguage
