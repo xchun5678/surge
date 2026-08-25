@@ -1,0 +1,49 @@
+# NAME: Bybit 完整版
+# DESCRIPTION: Bybit 完整规则集（合并 ennann/SurgeToolkit + yixiuxiu666 全量域名）
+# AUTHOR: xchun5678
+# 覆盖: 主站/API/REST/WebSocket/CDN/Region 域名
+
+DOMAIN-SUFFIX,bybit.com
+DOMAIN-SUFFIX,bybitglobal.com
+DOMAIN-SUFFIX,bybit-global.com
+DOMAIN-SUFFIX,bybit.com.hk
+DOMAIN-SUFFIX,bytick.com
+DOMAIN-SUFFIX,byapis.com
+DOMAIN-SUFFIX,bycsi.com
+DOMAIN-SUFFIX,bycbe.com
+DOMAIN-SUFFIX,bymj.io
+DOMAIN-SUFFIX,bybit.biz
+DOMAIN-SUFFIX,byapps.net
+DOMAIN-SUFFIX,byabcde.com
+DOMAIN-SUFFIX,bybdc6.com
+DOMAIN-SUFFIX,byd3c3.com
+DOMAIN-SUFFIX,bybit.cloud
+DOMAIN-SUFFIX,bybit-aws.com
+DOMAIN-SUFFIX,bybit.ada.support
+DOMAIN-SUFFIX,byhkbit.com
+DOMAIN-SUFFIX,bybit.nl
+DOMAIN-SUFFIX,bybit.tr
+DOMAIN-SUFFIX,bybit-tr.com
+DOMAIN-SUFFIX,bybit.kz
+DOMAIN-SUFFIX,bybitgeorgia.ge
+DOMAIN-SUFFIX,bybit.ae
+DOMAIN-SUFFIX,bybit.eu
+DOMAIN-SUFFIX,bybit.id
+DOMAIN-SUFFIX,moneypartners.co.jp
+DOMAIN,www.bybit.eu
+DOMAIN,learn.bybit.eu
+DOMAIN,api.bybit.eu
+DOMAIN,api1.bybit.eu
+DOMAIN,api2.bybit.eu
+DOMAIN,api3.bybit.eu
+DOMAIN,api4.bybit.eu
+DOMAIN,api5.bybit.eu
+DOMAIN,ws.bybit.eu
+DOMAIN,ws1.bybit.eu
+DOMAIN,ws2.bybit.eu
+DOMAIN,stream.bybit.eu
+DOMAIN,api.bybit.com
+DOMAIN,api.bytick.com
+DOMAIN,stream.bybit.com
+DOMAIN,stream.bytick.com
+DOMAIN-KEYWORD,bybit
