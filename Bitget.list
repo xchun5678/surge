@@ -6,8 +6,17 @@
 # 主站 / App / API（覆盖所有 bitget.com 子域名）
 DOMAIN-SUFFIX,bitget.com
 
+# 中国区 API（riafbg.cn）
+DOMAIN-SUFFIX,riafbg.cn
+
+# 行情流 / WebSocket（abcdstable.com）
+DOMAIN-SUFFIX,abcdstable.com
+
 # 联盟推广
 DOMAIN-SUFFIX,bitgetapps.com
+
+# 统计分析
+DOMAIN-SUFFIX,app-analytics-services.com
 
 # 图片 CDN
 DOMAIN-SUFFIX,bgstatic.com
