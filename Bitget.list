@@ -20,6 +20,10 @@ DOMAIN-SUFFIX,abcdstable.com
 
 # 统计分析
 DOMAIN-SUFFIX,app-analytics-services.com
+DOMAIN-SUFFIX,noxiaohao.com
+
+# API 备用 / 域名变体（实际抓包确认）
+DOMAIN-SUFFIX,gdrichem.com
 
 # 图片 CDN
 DOMAIN-SUFFIX,bgstatic.com
