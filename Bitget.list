@@ -1,0 +1,13 @@
+# NAME: Bitget
+# DESCRIPTION: Bitget 加密货币交易所域名分流（基于实际抓包 + 官方域名）
+# AUTHOR: xchun5678
+# 抓包来源: Surge 实际请求
+
+# 主站 / App / API（覆盖所有 bitget.com 子域名）
+DOMAIN-SUFFIX,bitget.com
+
+# 联盟推广
+DOMAIN-SUFFIX,bitgetapps.com
+
+# 图片 CDN
+DOMAIN-SUFFIX,bgstatic.com
