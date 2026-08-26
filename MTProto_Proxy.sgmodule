@@ -1,11 +1,13 @@
 #!name=MTProto_Proxy
-#!desc=MTProto Proxy module for Telegram.
-#!author=xchun5678
+#!desc=MTProto 代理模块，支持 Telegram 加速。ipv6 参数可编辑（true 启用 IPv6，false 禁用）
+#!author=xchun5678 (由 mickeu 版修改 interface 为 127.0.0.1)
+#!category=mickeu
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Telegram_05.png
+#!arguments=IPv6:true
+#!arguments-desc=ipv6 开关：true 启用 IPv6，false 禁用 IPv6
 
 [MTProto]
 interface = 127.0.0.1
 port = 5753
-secret = abcdef0123456789abcdef0123456789
-ipv6 = true
-dc-config-url = https://github.com/Repcz/Tool/raw/X/Surge/mtproto-dc-config.json
+secret = 0c28a2f5a59025491c6bea2805ad1a4c
+ipv6 = {{{IPv6}}}
