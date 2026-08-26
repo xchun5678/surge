@@ -1,0 +1,18 @@
+#!name=贝蒂的基础面板 + IP-Pure
+#!desc=Betty-Basic-Panel（本地网络/出口IP/DNS/延迟/测速/流媒体/AI/剩余流量/IP风险）+ IP-Pure（节点IP纯净度检测）
+#!category=🩺 网络工具
+#!system=ios
+#!arguments=Proxy:DIRECT,MarkIP:false
+#!arguments-desc=Proxy: 选择策略组,默认DIRECT @from wish | MarkIP: IP 打码(true/false),默认 false
+
+[Rule]
+# IP-Pure 检测请求走选定的代理策略
+DOMAIN-SUFFIX,ippure.com,{{{Proxy}}}
+
+[Panel]
+贝蒂的基础面板 = script-name=Betty-Basic-Panel, update-interval=1800
+IP-Pure = script-name=IP-Pure, title=IP 纯净度, content=刷新中…, style=info, update-interval=300
+
+[Script]
+Betty-Basic-Panel = type=generic, script-path=https://raw.githubusercontent.com/BeatriceArchive/Beatrice-Surge-Modules/main/Scripts/Betty-Basic-Panel.js, timeout=90, argument="YS=1&RISK=1"
+IP-Pure = type=generic, timeout=10, argument={{{MarkIP}}}, script-path=https://raw.githubusercontent.com/Likhixang/Egerny/main/js/IPPure.js
