@@ -1,0 +1,6 @@
+#!name=蜂窝下全局直连
+#!desc=蜂窝网络下所有流量直接直连（仅蜂窝网络生效，Wi-Fi 不受影响）
+
+[Rule]
+# 蜂窝网络下所有流量直接直连（优先级最高）
+SUBNET,TYPE:CELLULAR,DIRECT
