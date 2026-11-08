@@ -640,19 +640,19 @@ var LABEL_W = (function () {
 
 var NAME_PAD = {
   netflix:   '\u3000\u3000\u3000\u3000  \u200a\u200a\u200a',
-  disney:    '\u3000\u3000\u3000   \u2009\u2009',
+  disney:    '\u3000\u3000\u3000   \u2009\u200a\u200a',
   youtube:   '\u3000           ',
   prime:     '\u3000\u3000\u200a',
   spotify:   '\u3000\u3000\u3000\u3000 \u200a',
-  hbo:       '\u3000\u3000\u3000 \u200a\u200a\u200a\u200a',
-  hulu:      '\u3000                  \u200a\u200a',
-  paramount: '\u3000\u3000',
-  peacock:   '               ',
-  viu:       '\u3000\u3000\u3000\u3000\u3000     \u200a',
+  hbo:       '\u3000\u3000\u3000 \u200a\u200a\u200a',
+  hulu:      '\u3000                  \u200a\u200a\u200a',
+  paramount: '\u3000   \u2009\u2009\u200a',
+  peacock:   '               \u200a',
+  viu:       '\u3000\u3000\u3000\u3000\u3000     ',
   abema:     '\u3000\u3000          ',
   bahamut:   '\u3000\u3000   ',
-  bili:      '\u3000\u3000    \u200a',
-  chatgpt:   '              \u200a',
+  bili:      '\u3000\u3000    ',
+  chatgpt:   '              \u200a\u200a',
   claude:    '\u3000\u3000          ',
   gemini:    '\u3000\u3000          '
 };
