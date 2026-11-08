@@ -51,7 +51,7 @@ function hash(s) {
 var GB = 1073741824;
 
 // ---------------- 参数：6 组机场（名 + 链接 + 重置日） ----------------
-// 改版：重置日填 0 = 该机场不重置（不参与公共重置日继承，面板显示「不重置」）；1-31 照旧；留空仍继承。
+// 改版：重置日填 0 = 该机场不重置（不参与公共重置日继承，面板不显示重置字样）；1-31 照旧；留空仍继承。
 var AIRPORTS = [];
 for (var gi = 0; gi < 6; gi++) {
   var nm = real(raw(gi * 3));
@@ -226,7 +226,7 @@ function blockFull(d, day, stale) {
   L.push('\u2191 ' + fmtB(up) + '   \u2193 ' + fmtB(down));
 
   if (day === 0) {
-    L.push('\u91cd\u7f6e  \u4e0d\u91cd\u7f6e');
+    // 不重置的机场不显示任何重置字样（用户要求），整行省略
   } else {
     var r = resetInfo(day);
     L.push('\u91cd\u7f6e  \u6bcf\u6708 ' + day + ' \u53f7 \u00b7 ' + md(r.date) +
@@ -266,7 +266,7 @@ function blockTight(d, name, day, stale) {
   }
 
   if (day === 0) {
-    L.push('\u2191' + fmtS(up) + '  \u2193' + fmtS(down) + '  \u4e0d\u91cd\u7f6e');
+    L.push('\u2191' + fmtS(up) + '  \u2193' + fmtS(down));
   } else {
     var r = resetInfo(day);
     L.push('\u2191' + fmtS(up) + '  \u2193' + fmtS(down) + '  ' + md(r.date) + ' \u91cd\u7f6e\u00b7' + day + '\u53f7');
@@ -306,7 +306,7 @@ function render(items) {
     if (!it.info) {
       L.push('\u2708\ufe0f ' + it.name);
       L.push('\u26a0\ufe0f \u83b7\u53d6\u5931\u8d25' + (it.err ? '\uff1a' + it.err : '') +
-        '  \u00b7' + (it.day === 0 ? '\u4e0d\u91cd\u7f6e' : '\u6bcf\u6708' + it.day + '\u53f7\u91cd\u7f6e'));
+        (it.day === 0 ? '' : '  \u00b7\u6bcf\u6708' + it.day + '\u53f7\u91cd\u7f6e'));
       return;
     }
     L = L.concat(multi ? blockTight(it.info, it.name, it.day, it.stale)
