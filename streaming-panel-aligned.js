@@ -639,20 +639,20 @@ var LABEL_W = (function () {
 // ============================================================
 
 var NAME_PAD = {
-  netflix:   '\u3000\u3000\u3000\u3000  \u200a\u200a\u200a',
-  disney:    '\u3000\u3000\u3000   \u2009\u200a\u200a',
+  netflix:   '\u3000\u3000\u3000\u3000   ',
+  disney:    '\u3000\u3000\u3000\u3000',
   youtube:   '\u3000           ',
-  prime:     '\u3000\u3000\u200a',
-  spotify:   '\u3000\u3000\u3000\u3000 \u200a',
-  hbo:       '\u3000\u3000\u3000 \u200a\u200a\u200a',
-  hulu:      '\u3000                  \u200a\u200a\u200a',
-  paramount: '\u3000   \u2009\u2009\u200a',
-  peacock:   '               \u200a',
+  prime:     '\u3000\u3000 ',
+  spotify:   '\u3000\u3000\u3000\u3000  ',
+  hbo:       '\u3000\u3000\u3000 \u200a\u200a\u200a\u200a',
+  hulu:      '\u3000                  ',
+  paramount: '\u3000\u3000 ',
+  peacock:   '               ',
   viu:       '\u3000\u3000\u3000\u3000\u3000     ',
   abema:     '\u3000\u3000          ',
   bahamut:   '\u3000\u3000   ',
   bili:      '\u3000\u3000    ',
-  chatgpt:   '              \u200a\u200a',
+  chatgpt:   '              ',
   claude:    '\u3000\u3000          ',
   gemini:    '\u3000\u3000          '
 };
@@ -676,11 +676,10 @@ function line(p, r) {
   else if (r.s === 'no') { mark = '❌'; text = r.r || R_GEO; }
   else { mark = '⚠️'; text = R_DOWN; }
 
-  // 表里没登记的平台上，退回按汉字数补齐（模块里只有这 16 个，不会走到）
-  var pad = (NAME_PAD[p.k] !== undefined) ? NAME_PAD[p.k] : '  ';
-
-  // 列顺序：平台名（左）→ 状态图标 → 状态词 → 国旗
-  return p.n + pad + ' ' + mark + ' ' + padText(text) + fg;
+  // 改版（作者新版式）：状态图标打头 → 状态词（padText 补齐 5 字宽）
+  // → 平台名 → 国旗。前两列锚定在行首、每行同位，名字从固定列起步，
+  // 天然成列，不再依赖按机型标定的 NAME_PAD 填充表（该表保留备查）。
+  return mark + ' ' + padText(text) + p.n + (fg ? ' ' + fg : '');
 }
 
 function orderOf(p) {
