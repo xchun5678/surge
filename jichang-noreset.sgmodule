@@ -1,0 +1,13 @@
+#!name=机场流量（不重置版）
+#!desc=V1.0 改版：重置日可填 0 表示该机场不重置（面板显示「不重置」）；其余与原版相同。需与 airport-panel-noreset.js 配套使用。
+#!author=许舟
+#!category=网络
+#!icon=gauge.with.needle
+#!arguments=机场name1:填写机场名,订阅URL1:填写URL,重置日1:填写重置日,机场name2:填写机场名,订阅URL2:填写URL,重置日2:填写重置日,机场name3:填写机场名,订阅URL3:填写URL,重置日3:填写重置日,机场name4:填写机场名,订阅URL4:填写URL,重置日4:填写重置日,机场name5:填写机场名,订阅URL5:填写URL,重置日5:填写重置日,机场name6:填写机场名,订阅URL6:填写URL,重置日6:填写重置日
+#!arguments-desc=把机场的订阅链接复制进去就可以了。\n六个机场各一格，想用几个填几个，不用的那组保持默认不动。\n\n【① 机场name】\n填机场名字，只用来显示，随便起。\n例：ikuuu、花云、云梯。\n名字里不要带英文逗号。\n\n【② 订阅URL】\n填这家机场的订阅地址。\n从机场后台复制整条 https 链接。\n?token= 后面那一长串、& 后面的参数，全部照抄，别截断。\n\n【③ 重置日】\n填这家机场每月几号流量清零，写数字 1 到 31。\n· 每月 6 号清零就填 6\n· 填 31 遇到小月（2 月、4 月等）自动按当月最后一天算\n· 留空则沿用第一个填了重置日的机场，全都空就按 1 号\n· 【改版】填 0 表示这家不重置，面板显示「不重置」，不跟随其他机场\n\n【编号对应】\nname1 + URL1 + 重置日1 是第 1 个机场。\nname2 + URL2 + 重置日2 是第 2 个，依此类推。\n三格必须填同一家，别串行。
+
+[Panel]
+机场流量改 = title="机场流量",content="数据加载中…\n\n点这张卡右上角的刷新按钮立即拉取，或等下次自动更新（10 分钟）",style=info,script-name=机场流量改,update-interval=600
+
+[Script]
+机场流量改 = type=generic,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/airport-panel-noreset.js,argument="{{{机场name1}}}|{{{订阅URL1}}}|{{{重置日1}}}|{{{机场name2}}}|{{{订阅URL2}}}|{{{重置日2}}}|{{{机场name3}}}|{{{订阅URL3}}}|{{{重置日3}}}|{{{机场name4}}}|{{{订阅URL4}}}|{{{重置日4}}}|{{{机场name5}}}|{{{订阅URL5}}}|{{{重置日5}}}|{{{机场name6}}}|{{{订阅URL6}}}|{{{重置日6}}}",timeout=60
