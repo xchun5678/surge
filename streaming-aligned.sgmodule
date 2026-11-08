@@ -1,0 +1,14 @@
+#!name=流媒体解锁（对齐版）
+#!desc=V1.2 逐平台实测解锁状态：Netflix、Disney+、YouTube、Prime Video、Spotify、HBO Max、Hulu、Paramount+、Peacock、Viu、Abema、巴哈动画疯、B站港澳台，以及 ChatGPT / Claude / Gemini 三家人工智能服务。每个策略组一块，发真实请求看对方真正看到的地区，不靠 IP 库猜。
+#!author=许舟
+#!category=网络
+#!icon=lock.open.fill
+#!homepage=https://github.com/zhiaon/Modules
+#!arguments=策略组:填写策略组名,平台:填写要测的平台
+#!arguments-desc=【策略组】\n填要测的组名或节点名，多个用竖线 | 分隔。\n例：美国|日本|中国台湾|中国香港\n留空则只测 FINAL 那条兜底组。\n\n【平台】\n留空 = 十六个平台全测。\n只想看几个就用逗号分隔，例：netflix,disney,chatgpt\n\n可用简写：\nnetflix / nf / 网飞 / 奈飞\ndisney / 迪士尼\nyoutube / yt / 油管\nprime / 亚马逊\nspotify / sp / 声田\nhbo / max\nhulu / hu\nparamount / pm / 派拉蒙\npeacock / pc / 孔雀\nviu\nabema / ab\nbahamut / 巴哈 / 动画疯\nbili / b站 / 哔哩哔哩\nchatgpt / gpt / openai\nclaude / 克劳德\ngemini / 谷歌\nai = 上面三个 AI 一起测\n\n卡片怎么读：\n第一行是「策略组 → 当前选中节点」\n第二行是「解锁率 x/y 已解锁」\n下面三块：影音平台、未解锁平台、AI 平台\n\n图标含义：\n✅ 已解锁，后面跟对方识别的国旗\n🟡 部分解锁，或没拿到明确信号\n❌ 未解锁，原因只有三种：地区限制 / 版权限制 / 服务不可用\n⚠️ 服务不可用：请求失败或超时，重刷一次\n\n全部平台都拿到明确结论时，卡片图标是绿色打开的锁；有请求失败则变成橙色警示三角。
+
+[Panel]
+流媒体解锁改 = title="流媒体解锁",content="正在逐个平台实测…\n\n十六家平台各发一次真实请求，一般 3 秒出结果。\n点右上角的刷新按钮可以立即重测。",style=info,script-name=流媒体解锁改,update-interval=1800
+
+[Script]
+流媒体解锁改 = type=generic,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/streaming-panel-aligned.js,script-update-interval=86400,argument="{{{策略组}}}||{{{平台}}}",timeout=120
