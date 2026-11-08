@@ -639,20 +639,20 @@ var LABEL_W = (function () {
 // ============================================================
 
 var NAME_PAD = {
-  netflix:   '\u3000\u3000\u3000\u3000   ',
-  disney:    '\u3000\u3000\u3000\u3000',
+  netflix:   '\u3000\u3000\u3000\u3000  \u200a\u200a',
+  disney:    '\u3000\u3000\u3000  \u2009\u2009',
   youtube:   '\u3000           ',
-  prime:     '\u3000\u3000 ',
-  spotify:   '\u3000\u3000\u3000\u3000  ',
+  prime:     '\u3000\u3000\u200a',
+  spotify:   '\u3000\u3000\u3000\u3000 \u200a',
   hbo:       '\u3000\u3000\u3000 \u200a\u200a\u200a\u200a',
-  hulu:      '\u3000                  ',
-  paramount: '\u3000\u3000 ',
+  hulu:      '\u3000                  \u200a\u200a',
+  paramount: '\u3000\u3000',
   peacock:   '               ',
-  viu:       '\u3000\u3000\u3000\u3000\u3000     ',
+  viu:       '\u3000\u3000\u3000\u3000\u3000     \u200a',
   abema:     '\u3000\u3000          ',
   bahamut:   '\u3000\u3000   ',
-  bili:      '\u3000\u3000    ',
-  chatgpt:   '              ',
+  bili:      '\u3000\u3000    \u200a',
+  chatgpt:   '              \u200a',
   claude:    '\u3000\u3000          ',
   gemini:    '\u3000\u3000          '
 };
@@ -676,13 +676,11 @@ function line(p, r) {
   else if (r.s === 'no') { mark = '❌'; text = r.r || R_GEO; }
   else { mark = '⚠️'; text = R_DOWN; }
 
-  // 改版（对齐版）：状态图标打头，每行从同一位置起步；平台名按显示宽度
-  // （汉字算 2、拉丁算 1，脚本自带 dw/pad）补齐到 LABEL_W；状态词沿用
-  // 原 padText 补到 5 字宽；国旗殿后。
-  // 原 NAME_PAD 是按 390pt 宽机型逐行标定的写死填充表，换到
-  // iPhone 18 Pro（402pt）与 Surge 6 新主页的渲染下整体失效、列位乱窜，
-  // 故弃用：图标打头的版式不依赖任何机型标定。
-  return mark + ' ' + pad(p.n, LABEL_W) + padText(text) + fg;
+  // 表里没登记的平台上，退回按汉字数补齐（模块里只有这 16 个，不会走到）
+  var pad = (NAME_PAD[p.k] !== undefined) ? NAME_PAD[p.k] : '  ';
+
+  // 列顺序：平台名（左）→ 状态图标 → 状态词 → 国旗
+  return p.n + pad + ' ' + mark + ' ' + padText(text) + fg;
 }
 
 function orderOf(p) {
