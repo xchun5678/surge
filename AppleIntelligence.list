@@ -1,0 +1,62 @@
+# Apple Intelligence 分流（自维护版）
+# 以 Roddy-D/Rules 的 AppleIntelligence.txt 为底合并（约 50 条）
+# ddgksf2013 版的 11 条（gateway.icloud.com、apple-relay.*、guzzoni、smoot、api-siri-prod 等）已被本表全覆盖，无需重复收录
+# 覆盖：Apple Intelligence 本体（PCC / afm / genai / writingtools）、Siri、ChatGPT 集成（oaistatic / oaiusercontent）、Gemini 集成、Private Relay / Mask
+# 尾部 4 段 Google IP 兜底来自 Roddy-D 原表：以 IP 直连 Google 时会命中本表策略
+
+DOMAIN,appleintelligence.apple.com
+DOMAIN,appleintelligence2.apple.com
+DOMAIN,api-siri-prod.apple.com
+DOMAIN,genai.apple.com
+DOMAIN,siri.apple.com
+DOMAIN,siri-api.apple.com
+DOMAIN,siri-intent.apple.com
+DOMAIN,siri-companion.apple.com
+DOMAIN,intelligence.apple.com
+DOMAIN,afm.apple.com
+DOMAIN,afm-api.apple.com
+DOMAIN,afm.cloud.apple.com
+DOMAIN-SUFFIX,pcc.apple.com
+DOMAIN-SUFFIX,pcp.apple.com
+DOMAIN-SUFFIX,vision.apple.com
+DOMAIN-SUFFIX,vision-api.apple.com
+DOMAIN-SUFFIX,writingtools.apple.com
+DOMAIN,api.apple.com
+DOMAIN,api2.apple.com
+DOMAIN,api5.apple.com
+DOMAIN,appleinc.akadns.net
+DOMAIN-SUFFIX,apple.com.akadns.net
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN,gemini.apple.com
+DOMAIN,geminiapis.apple.com
+DOMAIN,geminiprops.apple.com
+DOMAIN,mask-api.fe.apple-dns.net
+DOMAIN,mask-api.icloud.com
+DOMAIN,mask-t.apple-dns.net
+DOMAIN,mask.apple-dns.net
+DOMAIN-SUFFIX,smoot.apple.com
+DOMAIN-SUFFIX,apple-relay.apple.com
+DOMAIN-SUFFIX,apple-relay.cloudflare.com
+DOMAIN-SUFFIX,apple-relay.fastly-edge.com
+DOMAIN-SUFFIX,apple-relay.akamaized.net
+DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net
+DOMAIN-SUFFIX,gateway.icloud.com
+DOMAIN-SUFFIX,cp4.cloudflare.com
+DOMAIN-SUFFIX,guzzoni.apple.com
+DOMAIN-SUFFIX,gspe1-ssl.ls.apple.com
+DOMAIN-SUFFIX,mask-h2.icloud.com
+DOMAIN-SUFFIX,mask.icloud.com
+DOMAIN-KEYWORD,appleintelligence
+DOMAIN-KEYWORD,genai
+DOMAIN-KEYWORD,siri-ai
+DOMAIN-KEYWORD,siri_ai
+DOMAIN-KEYWORD,applellm
+DOMAIN-KEYWORD,apple-llm
+DOMAIN-KEYWORD,afm-cloud
+
+# ===== Google IP 兜底 =====
+IP-CIDR,142.250.0.0/15,no-resolve
+IP-CIDR,172.217.0.0/16,no-resolve
+IP-CIDR,216.58.192.0/19,no-resolve
+IP-CIDR,74.125.0.0/16,no-resolve
