@@ -1,8 +1,12 @@
-# NAME: Muse AI
-# DESCRIPTION: Muse AI 分流（从 ddgksf2013 Ai.yaml 提取，转 Surge 格式）
-# SOURCE: https://ddgksf2013.top/filter/Ai.yaml
+# NAME: Muse
+# DESCRIPTION: Muse (Meta) 分流规则集
+# SOURCE: 初版从 ddgksf2013 Ai.yaml 提取（https://ddgksf2013.top/filter/Ai.yaml）
+# UPDATED: 2026-11-09 补入 meta.ai 后端域名——据用户 Surge 实时请求核对，
+#          Muse App 实际在连 hatch-api.meta.ai / graph.meta.ai / meta.graph.meta.com
 DOMAIN-SUFFIX,muse.ai
+DOMAIN-SUFFIX,meta.ai
 DOMAIN,production.museai.com
+DOMAIN,meta.graph.meta.com
 DOMAIN,connect.facebook.net
 DOMAIN,meta-ohttp-config-prod.fastly-edge.com
 DOMAIN,meta-ohttp-relay-prod.fastly-edge.com
