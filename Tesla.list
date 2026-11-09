@@ -1,0 +1,21 @@
+# Tesla 分流（自维护版）
+# 基于 blackmatrix7/ios_rule_script 的 Tesla.list（2025-06-06 版，12 条）
+# 补入原表缺失的中国域名 tesla.cn —— 否则会被 Proxy 规则集的 DOMAIN-KEYWORD,tesla 抢去走代理
+# 其余中国域名（tesla.com.cn、teslamotors.cn 等）原表已有
+
+# 中国特斯拉（补）
+DOMAIN-SUFFIX,tesla.cn
+
+# blackmatrix7 原表
+DOMAIN-SUFFIX,solarcity.com
+DOMAIN-SUFFIX,tesla-cdn.thron.cn
+DOMAIN-SUFFIX,tesla-cdn.thron.com
+DOMAIN-SUFFIX,tesla.com
+DOMAIN-SUFFIX,tesla.com.cn
+DOMAIN-SUFFIX,tesla.services
+DOMAIN-SUFFIX,teslaenergy.services
+DOMAIN-SUFFIX,teslamotors.cn
+DOMAIN-SUFFIX,teslamotors.com
+DOMAIN-SUFFIX,teslamotors.com.cn
+DOMAIN-SUFFIX,teslazta.net
+DOMAIN-SUFFIX,ts.la
