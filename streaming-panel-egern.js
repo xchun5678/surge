@@ -8,8 +8,8 @@
 //                                   组头不再显示当前选中节点名
 //   $done({title, content...})   -> 返回 Egern 小组件 DSL（等宽字体原样排版）
 //   setTimeout 兜底              -> 已移除，靠 ctx.http 的 timeout 收敛
-// V3 排版：仿 NetStatus（milu GPT-AI）卡片网格——每平台一张小卡
-// （状态点+名 / 国旗地区+状态词），中等尺寸 5 列紧凑网格、大尺寸 3 列。
+// V2 排版：画廊/中等尺寸自动两列显示全量明细（分段处断开），
+// 大尺寸单列，锁屏/小尺寸只显示解锁率。
 // 参数（模块设置页 Env）：
 //   GROUPS    策略组名或节点名，多个用 | 分隔，留空 = 只测 Proxy
 //   PLATFORMS 平台简写，逗号分隔，留空 = 16 个全测
@@ -17,123 +17,85 @@
 
 function buildWidget(obj, ctx) {
   var title = obj.title || '流媒体解锁';
-  var icon = obj.icon || 'lock.open.fill';
-  var iconColor = obj['icon-color'] || '#22C55E';
+  var content = obj.content || '';
+  var icon = obj.icon || 'play.tv.fill';
+  var color = obj['icon-color'] || '#22C55E';
   var fam = (ctx && ctx.widgetFamily) || '';
-  var groups = obj.groups || [];
-  var g0 = groups[0] || { title: 'Proxy', platforms: [], results: [] };
 
-  // 与 NetStatus 相同的自适应配色
-  var C = {
-    bg:    { light: '#FFFFFF', dark: '#050506' },
-    text:  { light: '#111114', dark: '#F7F7F8' },
-    dim:   { light: '#7B7B84', dark: '#85858E' },
-    panel: { light: '#F5F5F7', dark: '#111114' },
-    chip:  { light: '#E8E8ED', dark: '#202025' },
-    ok:    { light: '#2F9E58', dark: '#C7FF18' },
-    part:  { light: '#D97706', dark: '#FFB340' },
-    fail:  { light: '#D64545', dark: '#FF626A' }
-  };
-
-  function flagOf(cc) {
-    if (!cc || !/^[A-Za-z]{2}$/.test(cc)) return '🌐';
-    var up = cc.toUpperCase();
-    return String.fromCodePoint(up.charCodeAt(0) + 127397) + String.fromCodePoint(up.charCodeAt(1) + 127397);
-  }
-  function nowHM() {
-    var d = new Date();
-    function two(n) { return (n < 10 ? '0' : '') + n; }
-    return two(d.getHours()) + ':' + two(d.getMinutes());
+  // 拆解原始文本：抽出组行、解锁率行、时间行，其余为平台明细（去掉空行）
+  var raw = content.split('\n');
+  var groupLine = '', rateLine = '', timeText = '', body = [];
+  for (var i = 0; i < raw.length; i++) {
+    var ln = raw[i];
+    if (ln.indexOf('🕒') === 0) { timeText = ln.replace('🕒 检测时间：', '').replace('🕒', '').trim(); continue; }
+    if (!groupLine && ln.indexOf('◆') === 0) { groupLine = ln; continue; }
+    if (!rateLine && ln.indexOf('📊') === 0) { rateLine = ln; continue; }
+    if (ln.trim() === '') continue;
+    body.push(ln);
   }
 
-  // 结构化结果 -> 卡片数据
-  var items = [];
-  var okCount = 0;
-  for (var i = 0; i < (g0.platforms || []).length; i++) {
-    var p = g0.platforms[i];
-    var r = (g0.results || [])[i] || { s: 'fail' };
-    var word, wordColor, dot;
-    if (r.s === 'ok') { word = '已解锁'; wordColor = C.ok; dot = C.ok; okCount++; }
-    else if (r.s === 'part') { word = '部分解锁'; wordColor = C.part; dot = C.part; }
-    else if (r.s === 'no') { word = r.r || '地区限制'; wordColor = C.fail; dot = C.fail; }
-    else { word = '服务不可用'; wordColor = C.dim; dot = C.dim; }
-    items.push({
-      name: p.n,
-      word: word, wordColor: wordColor, dot: dot,
-      region: r.cc ? flagOf(r.cc) + ' ' + String(r.cc).toUpperCase() : '🌐 --'
-    });
-  }
-  var total = items.length;
-
-  var header = {
+  var titleRow = {
     type: 'stack', direction: 'row', alignItems: 'center', gap: 6,
     children: [
-      { type: 'image', src: 'sf-symbol:' + icon, color: iconColor, width: 14, height: 14 },
-      { type: 'text', text: title, font: { size: 13.5, weight: 'bold' }, textColor: C.text },
-      { type: 'text', text: g0.title || '', font: { size: 10 }, textColor: C.dim, maxLines: 1 },
+      { type: 'image', src: 'sf-symbol:' + icon, color: color, width: 18, height: 18 },
+      { type: 'text', text: title, font: { size: 'headline', weight: 'bold' } },
       { type: 'spacer' },
-      {
-        type: 'stack', padding: [2, 6, 2, 6], backgroundColor: C.chip, borderRadius: 4,
-        children: [{ type: 'text', text: okCount + '/' + total, font: { size: 10, weight: 'bold', design: 'monospaced' }, textColor: total && okCount === total ? C.ok : C.fail }]
-      },
-      { type: 'text', text: nowHM(), font: { size: 11, weight: 'medium', design: 'monospaced' }, textColor: C.dim }
+      { type: 'text', text: rateLine, font: { size: 11, family: 'Menlo' } }
     ]
   };
+  var subText = groupLine + (timeText ? '  ·  ' + timeText : '');
+  var subRow = { type: 'text', text: subText, font: { size: 11, family: 'Menlo' }, textColor: { light: '#666666', dark: '#AAAAAA' } };
 
-  function dotEl(color, size) {
-    return { type: 'stack', width: size, height: size, borderRadius: size / 2, backgroundColor: color };
-  }
-
-  // 锁屏 / 小尺寸：只给计数
+  // 小尺寸：只给标题 + 解锁率
   if (fam.indexOf('accessory') === 0 || fam === 'systemSmall') {
     return {
-      type: 'widget', backgroundColor: C.bg, padding: [10, 12, 10, 12], gap: 5,
-      children: [header,
-        { type: 'text', text: '已解锁 ' + okCount + '/' + total, font: { size: 11 }, textColor: C.dim }]
+      type: 'widget', padding: 10, gap: 4,
+      children: [
+        { type: 'text', text: title, font: { size: 'headline', weight: 'bold' } },
+        { type: 'text', text: rateLine || groupLine, font: { size: 'caption1' } }
+      ]
     };
   }
 
-  function grid(cols, nameSize, infoSize, padArr, radius, gap) {
-    var rows = [];
-    for (var a = 0; a < items.length; a += cols) {
-      var cells = [];
-      for (var b = a; b < Math.min(a + cols, items.length); b++) {
-        (function (it) {
-          cells.push({
-            type: 'stack', direction: 'column', backgroundColor: C.panel, borderRadius: radius,
-            padding: padArr, flex: 1, gap: 2,
-            children: [
-              { type: 'stack', direction: 'row', alignItems: 'center', gap: 4, children: [
-                dotEl(it.dot, 5),
-                { type: 'text', text: it.name, font: { size: nameSize, weight: 'bold' }, textColor: C.text, flex: 1, maxLines: 1 }
-              ]},
-              { type: 'stack', direction: 'row', alignItems: 'center', children: [
-                { type: 'text', text: it.region, font: { size: infoSize, weight: 'semibold', design: 'monospaced' }, textColor: C.dim },
-                { type: 'spacer' },
-                { type: 'text', text: it.word, font: { size: infoSize, weight: 'medium' }, textColor: it.wordColor }
-              ]}
-            ]
-          });
-        })(items[b]);
-      }
-      while (cells.length < cols) cells.push({ type: 'stack', flex: 1, children: [] });
-      rows.push({ type: 'stack', direction: 'row', gap: gap, children: cells });
-    }
-    return { type: 'stack', direction: 'column', gap: gap, flex: 1, children: rows };
-  }
-
-  // 大尺寸：3 列网格
+  // 大尺寸：单列全量
   if (fam === 'systemLarge' || fam === 'systemExtraLarge') {
     return {
-      type: 'widget', backgroundColor: C.bg, padding: [14, 14, 14, 14], gap: 8,
-      children: [header, grid(3, 11.5, 10, [8, 9, 8, 9], 10, 7)]
+      type: 'widget', padding: 12, gap: 5,
+      children: [
+        titleRow, subRow,
+        { type: 'text', text: body.join('\n'), font: { size: 11.5, family: 'Menlo' }, maxLines: 80, minScale: 0.8 }
+      ]
     };
   }
 
-  // 中等尺寸（含画廊）：5 列紧凑网格，19 个平台 4 行排满
+  // 其余（含画廊默认尺寸）：两列排版，在分段标题处找最平衡的断点
+  var n = body.length;
+  var split = Math.ceil(n / 2);
+  var best = -1, bestScore = 1e9;
+  for (var j = 1; j < n; j++) {
+    var head = body[j].charAt(0);
+    var isBoundary = (body[j].indexOf('📺') === 0 || body[j].indexOf('🚫') === 0 ||
+                      body[j].indexOf('🤖') === 0 || body[j].indexOf('◆') === 0 || body[j].indexOf('📊') === 0);
+    if (!isBoundary) continue;
+    var score = Math.max(j, n - j);
+    if (score < bestScore) { bestScore = score; best = j; }
+  }
+  if (best > 0) split = best;
+  var left = body.slice(0, split).join('\n');
+  var right = body.slice(split).join('\n');
+  var colFont = { size: 10.5, family: 'Menlo' };
   return {
-    type: 'widget', backgroundColor: C.bg, padding: [9, 11, 9, 11], gap: 5,
-    children: [header, grid(5, 9.5, 8.5, [4.5, 5, 4.5, 5], 7, 4)]
+    type: 'widget', padding: 12, gap: 5,
+    children: [
+      titleRow, subRow,
+      {
+        type: 'stack', direction: 'row', alignItems: 'start', gap: 10,
+        children: [
+          { type: 'text', text: left, font: colFont, maxLines: 40, minScale: 0.75, flex: 1 },
+          { type: 'text', text: right, font: colFont, maxLines: 40, minScale: 0.75, flex: 1 }
+        ]
+      }
+    ]
   };
 }
 
@@ -902,9 +864,8 @@ function render() {
   $done({
     title: '流媒体解锁',
     content: L.join('\n'),
-    icon: anyFail ? 'exclamationmark.triangle.fill' : 'lock.open.fill',
-    'icon-color': anyFail ? '#F59E0B' : '#22C55E',
-    groups: OUT
+    icon: anyFail ? 'exclamationmark.triangle.fill' : 'play.tv.fill',
+    'icon-color': anyFail ? '#F59E0B' : '#22C55E'
   });
 }
 
