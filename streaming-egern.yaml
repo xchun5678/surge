@@ -1,0 +1,21 @@
+name: 流媒体解锁
+description: 逐平台实测解锁状态：Netflix、Disney+、YouTube、Prime Video、Spotify、HBO Max、Hulu、Paramount+、Peacock、Viu、Abema、巴哈动画疯、B站港澳台，以及 ChatGPT / Claude / Gemini。每个策略组发真实请求看对方真正看到的地区，不靠 IP 库猜。Egern 版：结果显示在「分析 → 小组件画廊」，默认测 Proxy 组。
+author: 许舟（原作）/ Egern 移植
+homepage: https://github.com/xchun5678/surge
+icon: lock.open.fill
+env_schema:
+  GROUPS:
+    name: 策略组
+    description: 要测的策略组名或节点名，多个用竖线 | 分隔。例：🇺🇸America|🇯🇵Japan。留空则只测 Proxy 组（Egern 的兜底组）。
+  PLATFORMS:
+    name: 平台
+    description: 留空 = 十六个平台全测。只测几个就用逗号分隔，例：netflix,disney,chatgpt。简写：netflix/nf、disney、youtube/yt、prime、spotify、hbo、hulu、paramount、peacock、viu、abema、bahamut、bili、chatgpt、claude、gemini、ai（三个 AI 一起）。
+scriptings:
+  - generic:
+      name: streaming-egern
+      script_url: https://raw.githubusercontent.com/xchun5678/surge/main/streaming-panel-egern.js
+      timeout: 120
+      update_interval: 86400
+widgets:
+  - name: 流媒体解锁
+    script_name: streaming-egern
