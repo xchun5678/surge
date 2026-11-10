@@ -8,6 +8,8 @@
 //                                   组头不再显示当前选中节点名
 //   $done({title, content...})   -> 返回 Egern 小组件 DSL（等宽字体原样排版）
 //   setTimeout 兜底              -> 已移除，靠 ctx.http 的 timeout 收敛
+// V2 排版：画廊/中等尺寸自动两列显示全量明细（分段处断开），
+// 大尺寸单列，锁屏/小尺寸只显示解锁率。
 // 参数（模块设置页 Env）：
 //   GROUPS    策略组名或节点名，多个用 | 分隔，留空 = 只测 Proxy
 //   PLATFORMS 平台简写，逗号分隔，留空 = 16 个全测
@@ -19,35 +21,80 @@ function buildWidget(obj, ctx) {
   var icon = obj.icon || 'lock.open.fill';
   var color = obj['icon-color'] || '#22C55E';
   var fam = (ctx && ctx.widgetFamily) || '';
-  if (fam.indexOf('accessory') === 0) {
-    var rate = '';
-    var lines = content.split('\n');
-    for (var i = 0; i < lines.length; i++) {
-      if (lines[i].indexOf('解锁率') >= 0) { rate = lines[i]; break; }
-    }
+
+  // 拆解原始文本：抽出组行、解锁率行、时间行，其余为平台明细（去掉空行）
+  var raw = content.split('\n');
+  var groupLine = '', rateLine = '', timeText = '', body = [];
+  for (var i = 0; i < raw.length; i++) {
+    var ln = raw[i];
+    if (ln.indexOf('🕒') === 0) { timeText = ln.replace('🕒 检测时间：', '').replace('🕒', '').trim(); continue; }
+    if (!groupLine && ln.indexOf('◆') === 0) { groupLine = ln; continue; }
+    if (!rateLine && ln.indexOf('📊') === 0) { rateLine = ln; continue; }
+    if (ln.trim() === '') continue;
+    body.push(ln);
+  }
+
+  var titleRow = {
+    type: 'stack', direction: 'row', alignItems: 'center', gap: 6,
+    children: [
+      { type: 'image', src: 'sf-symbol:' + icon, color: color, width: 18, height: 18 },
+      { type: 'text', text: title, font: { size: 'headline', weight: 'bold' } },
+      { type: 'spacer' },
+      { type: 'text', text: rateLine, font: { size: 11, family: 'Menlo' } }
+    ]
+  };
+  var subText = groupLine + (timeText ? '  ·  ' + timeText : '');
+  var subRow = { type: 'text', text: subText, font: { size: 11, family: 'Menlo' }, textColor: { light: '#666666', dark: '#AAAAAA' } };
+
+  // 小尺寸：只给标题 + 解锁率
+  if (fam.indexOf('accessory') === 0 || fam === 'systemSmall') {
     return {
-      type: 'widget',
-      padding: 8,
-      gap: 4,
+      type: 'widget', padding: 10, gap: 4,
       children: [
         { type: 'text', text: title, font: { size: 'headline', weight: 'bold' } },
-        { type: 'text', text: rate || '点开 Egern 查看', font: { size: 'caption1' } }
+        { type: 'text', text: rateLine || groupLine, font: { size: 'caption1' } }
       ]
     };
   }
+
+  // 大尺寸：单列全量
+  if (fam === 'systemLarge' || fam === 'systemExtraLarge') {
+    return {
+      type: 'widget', padding: 12, gap: 5,
+      children: [
+        titleRow, subRow,
+        { type: 'text', text: body.join('\n'), font: { size: 11.5, family: 'Menlo' }, maxLines: 80, minScale: 0.8 }
+      ]
+    };
+  }
+
+  // 其余（含画廊默认尺寸）：两列排版，在分段标题处找最平衡的断点
+  var n = body.length;
+  var split = Math.ceil(n / 2);
+  var best = -1, bestScore = 1e9;
+  for (var j = 1; j < n; j++) {
+    var head = body[j].charAt(0);
+    var isBoundary = (body[j].indexOf('📺') === 0 || body[j].indexOf('🚫') === 0 ||
+                      body[j].indexOf('🤖') === 0 || body[j].indexOf('◆') === 0 || body[j].indexOf('📊') === 0);
+    if (!isBoundary) continue;
+    var score = Math.max(j, n - j);
+    if (score < bestScore) { bestScore = score; best = j; }
+  }
+  if (best > 0) split = best;
+  var left = body.slice(0, split).join('\n');
+  var right = body.slice(split).join('\n');
+  var colFont = { size: 10.5, family: 'Menlo' };
   return {
-    type: 'widget',
-    padding: 12,
-    gap: 6,
+    type: 'widget', padding: 12, gap: 5,
     children: [
+      titleRow, subRow,
       {
-        type: 'stack', direction: 'row', alignItems: 'center', gap: 6,
+        type: 'stack', direction: 'row', alignItems: 'start', gap: 10,
         children: [
-          { type: 'image', src: 'sf-symbol:' + icon, color: color, width: 18, height: 18 },
-          { type: 'text', text: title, font: { size: 'headline', weight: 'bold' } }
+          { type: 'text', text: left, font: colFont, maxLines: 40, minScale: 0.75, flex: 1 },
+          { type: 'text', text: right, font: colFont, maxLines: 40, minScale: 0.75, flex: 1 }
         ]
-      },
-      { type: 'text', text: content, font: { size: 12, family: 'Menlo' } }
+      }
     ]
   };
 }
