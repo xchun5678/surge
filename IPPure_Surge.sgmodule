@@ -1,0 +1,11 @@
+#!name=IP 纯净度 · IPPure
+#!desc=用 IPPure 检测出口 IP 的纯净度，分档、名称和颜色跟官网一致；同时显示住宅/机房、原生/广播、ASN 和运营商。脚本与模块存放在自己的仓库，脚本为 vfelix7 原版（与 Egern 小组件 IP_Purity_Widget 同一套判断）。
+#!category=网络检测
+#!arguments=Proxy:跟随规则,MarkIP:true
+#!arguments-desc=Proxy：检测哪个策略组或节点的出口 IP；填「跟随规则」按 Surge 规则走\nMarkIP：IP 打码（true / false），默认 true
+
+[Panel]
+IPPure-Panel = script-name=ippure-surge-panel, title=IP 纯净度, content=检测中…, style=info, update-interval=600
+
+[Script]
+ippure-surge-panel = type=generic, timeout=15, argument=Proxy={{{Proxy}}}&MarkIP={{{MarkIP}}}, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/IPPure_Surge_Panel.js, script-update-interval=86400
