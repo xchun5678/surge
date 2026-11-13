@@ -8,12 +8,13 @@
 // 每项带实测延迟。排版为图标打头对齐格式。
 //
 // 参数（模块里填）：策略组
-//   留空 = 按 Surge 分流规则发请求（App 实际吃到的结果）
+//   「跟随规则」= 按 Surge 分流规则发请求（App 实际吃到的结果）
 //   填策略组名或节点名 = 全部请求钉在那个出口上测
 // ============================================================
 
 const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
-const POLICY = (typeof $argument === 'string' ? $argument : '').trim();
+const ARG = (typeof $argument === 'string' ? $argument : '').trim();
+const POLICY = (ARG && ARG !== '跟随规则') ? ARG : '';
 
 function flag(cc) {
   if (!cc || cc === 'XX') return '🌐';
