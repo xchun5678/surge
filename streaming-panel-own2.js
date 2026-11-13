@@ -4,8 +4,8 @@
 // 10 个平台并行实测：YouTube、Netflix、Disney+、Prime Video、HBO Max、
 // Spotify、ChatGPT、Claude、Gemini、Grok。
 // 判定用各家状态码 / 跳转 / 页面地区信号；地区显示对方实际看到的出口
-// 归属（能从服务自身响应里读到的用它自己的，其余用出口 IP 归属地）；
-// 每项带实测延迟。排版为图标打头对齐格式。
+// 归属（能从服务自身响应里读到的用它自己的，其余用出口 IP 归属地）。
+// 排版为图标打头对齐格式。
 //
 // 参数（模块里填）：策略组
 //   「跟随规则」= 按 Surge 分流规则发请求（App 实际吃到的结果）
@@ -136,7 +136,7 @@ async function fetchExit() {
   function line(r) {
     const head = { ok: '✅ 已解锁　　　', blocked: '❌ 地区限制　　', err: '⚠️ 服务不可用' }[r.st];
     let s = head + ' ' + r.name;
-    if (r.st === 'ok') s += ' ' + flag(r.region) + ' ' + r.ms + 'ms';
+    if (r.st === 'ok') s += ' ' + flag(r.region);
     else if (r.st === 'blocked' && r.region) s += ' ' + flag(r.region);
     return s;
   }
@@ -156,7 +156,7 @@ async function fetchExit() {
   $done({
     title: '流媒体解锁',
     content: L.join('\n'),
-    icon: errCount ? 'exclamationmark.triangle.fill' : 'lock.open.fill',
+    icon: errCount ? 'exclamationmark.triangle.fill' : 'play.tv.fill',
     'icon-color': errCount ? '#F59E0B' : '#22C55E'
   });
 })();

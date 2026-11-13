@@ -1,7 +1,7 @@
 #!name=流媒体解锁（自制版）
-#!desc=自制流媒体解锁面板：YouTube、Netflix、Disney+、Prime Video、HBO Max、Spotify、ChatGPT、Claude、Gemini、Grok 共 10 项并行实测，5 秒左右出结果；显示真实出口地区与每项延迟，图标打头对齐排版。脚本自托管在自己的仓库。
+#!desc=自制流媒体解锁面板：YouTube、Netflix、Disney+、Prime Video、HBO Max、Spotify、ChatGPT、Claude、Gemini、Grok 共 10 项并行实测，5 秒左右出结果；显示真实出口地区，图标打头对齐排版。脚本自托管在自己的仓库。
 #!category=网络
-#!icon=lock.open.fill
+#!icon=play.tv.fill
 #!arguments=策略组:跟随规则
 #!arguments-desc=【策略组】保持「跟随规则」= 按 Surge 分流规则测（App 实际吃到的结果）；改成策略组名或节点名 = 全部请求钉在那个出口上测。
 
