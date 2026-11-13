@@ -1,5 +1,5 @@
 #!name=小红书/RedNote 去水印去广告（自制版）
-#!desc=xchun5678 自制：Map Local 拦截水印配置接口（客户端拿不到水印配置）+ 自研脚本 rednote-clean3.js 处理响应体（关水印开关、去信息流/搜索/开屏广告、视频与实况照片保存换原画地址、评论区媒体解锁）。适配海外版 RedNote（rnote.com），不依赖任何第三方脚本。
+#!desc=xchun5678 自制：Map Local 拦截水印配置接口（客户端拿不到水印配置）+ 自研脚本 rednote-clean4.js 处理响应体（关水印开关、去信息流/搜索/开屏广告、视频与实况照片保存换原画地址、评论区媒体解锁）。适配海外版 RedNote（rnote.com），不依赖任何第三方脚本。
 #!author=xchun5678
 #!homepage=https://github.com/xchun5678/surge
 #!category=自制
@@ -24,18 +24,18 @@ DOMAIN-SUFFIX,rnote.com,DIRECT
 ^https:\/\/ci\.(?:xiaohongshu|rnote)\.com\/system_config\/(?:advertise|splash) data-type=tiny-gif status-code=200
 
 [Script]
-RN-imagefeed = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/note\/(?:imagefeed|live_photo\/save)(\?|$), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=图片与实况照片去水印
-RN-uiconfig = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/system\/service\/ui\/config\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=界面配置净化
-RN-sysconfig = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/system_service\/config\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=移除开屏广告配置
-RN-splash = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v2\/system_service\/splash_config, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=移除开屏 splash
-RN-widgets = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v2\/(?:note\/widgets|user\/followings\/followfeed), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=移除详情页小部件
-RN-followfeed = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v4\/followfeed\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=关注流去推荐
-RN-followrec = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v5\/recommend\/user\/follow_recommend\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=移除感兴趣的人
-RN-comment = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/(?:v1\/interaction\/comment\/video\/download|v5\/note\/comment\/list), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=评论区媒体去水印
-RN-feed = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/(?:v2\/note\/feed|v3\/note\/videofeed), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=图文与视频去水印
-RN-homefeed = type=http-response, pattern=^https:\/\/(?:edith|rec)\.rnote\.com\/api\/sns\/v6\/homefeed\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=信息流去广告
-RN-search = type=http-response, pattern=^https:\/\/(?:edith|so)\.rnote\.com\/api\/sns\/v10\/search\/notes\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=搜索页去广告
-RN-video = type=http-response, pattern=^https:\/\/(?:edith|rec|www)\.rnote\.com\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean3.js, requires-body=true, tag=视频去水印与原画下载
+RN-imagefeed = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/note\/(?:imagefeed|live_photo\/save)(\?|$), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=图片与实况照片去水印
+RN-uiconfig = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/system\/service\/ui\/config\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=界面配置净化
+RN-sysconfig = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v1\/system_service\/config\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=移除开屏广告配置
+RN-splash = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v2\/system_service\/splash_config, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=移除开屏 splash
+RN-widgets = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v2\/(?:note\/widgets|user\/followings\/followfeed), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=移除详情页小部件
+RN-followfeed = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v4\/followfeed\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=关注流去推荐
+RN-followrec = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/v5\/recommend\/user\/follow_recommend\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=移除感兴趣的人
+RN-comment = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/(?:v1\/interaction\/comment\/video\/download|v5\/note\/comment\/list), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=评论区媒体去水印
+RN-feed = type=http-response, pattern=^https:\/\/edith\.rnote\.com\/api\/sns\/(?:v2\/note\/feed|v3\/note\/videofeed), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=图文与视频去水印
+RN-homefeed = type=http-response, pattern=^https:\/\/(?:edith|rec)\.rnote\.com\/api\/sns\/v6\/homefeed\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=信息流去广告
+RN-search = type=http-response, pattern=^https:\/\/(?:edith|so)\.rnote\.com\/api\/sns\/v10\/search\/notes\?, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=搜索页去广告
+RN-video = type=http-response, pattern=^https:\/\/(?:edith|rec|www)\.rnote\.com\/api\/sns\/(?:v4\/note\/videofeed|v10\/note\/video\/save), script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-clean4.js, requires-body=true, tag=视频去水印与原画下载
 
 [MITM]
 hostname = %APPEND% ci.xiaohongshu.com, ci.rnote.com, edith.xiaohongshu.com, edith.rnote.com, rec.rnote.com, so.rnote.com, www.xiaohongshu.com, www.rnote.com, music.rnote.com, *.xhscdn.com, *.rednotecan.com
