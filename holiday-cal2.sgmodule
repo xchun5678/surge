@@ -1,0 +1,9 @@
+#!name=节假日日历
+#!desc=双周日历 + 中国法定节假日：农历、节气、传统节日之外，放假日标「放假」（节日当天显示节日名）、调休日标「上班」，假期段起止与调休日列在面板下方。节假日数据为国务院公布的 2026–2027 年安排，内置在脚本里、纯本地不联网；2028 年安排公布后喊我更新数据即可。
+#!category=日历
+
+[Panel]
+节假日日历 = script-name=节假日日历, title=节假日日历, content=加载中…, style=info, update-interval=3600
+
+[Script]
+节假日日历 = type=generic, timeout=10, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/holiday-cal2.js, script-update-interval=86400
