@@ -1,0 +1,9 @@
+#!name=双周日历
+#!desc=两周日期带农历、节日与节气。移植自 IBL3ND 的 Egern 小组件 CN_Cal，农历/节气/节日计算逻辑原样保留、纯本地计算不联网；Surge 面板以文字行呈现，今天用【】标出，三字以上节日全名列在下方注脚行。
+#!category=日历
+
+[Panel]
+CN-Cal = script-name=CN-Cal, title=双周日历, content=加载中…, style=info, update-interval=3600
+
+[Script]
+CN-Cal = type=generic, timeout=10, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/CN_Cal_Surge.js, script-update-interval=86400
