@@ -1,0 +1,11 @@
+# NAME: BOCHK
+# DESCRIPTION: 中银香港及附属机构分流规则集
+# SOURCE: 汇总自 v2fly/domain-list-community（data/boc）与 heimian0722-hash/clashrule 的 BankHK_Domain.yaml，并逐个核对各机构官网（2026-11-13）
+# bochk.com      中银香港本体（官网 / 网上银行 / 手机 App 均在此域名下）
+# ncb.com.hk     南洋商业银行（中银香港全资附属银行）
+# chiyu.com.hk   集友银行（中银香港附属银行）
+# boclife.com.hk 中银人寿（股东含中银香港（控股））
+DOMAIN-SUFFIX,bochk.com
+DOMAIN-SUFFIX,ncb.com.hk
+DOMAIN-SUFFIX,chiyu.com.hk
+DOMAIN-SUFFIX,boclife.com.hk
