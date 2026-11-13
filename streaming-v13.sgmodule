@@ -1,0 +1,13 @@
+#!name=流媒体解锁（自托管）
+#!desc=V1.3 逐平台实测解锁状态，与 zhiaon 官方 V1.3 完全一致（图标打头对齐排版），脚本逐字自托管在自己的仓库：上游改版不会影响这份，官方出新版时喊我同步。检测 Netflix、Disney+、YouTube、Prime Video、Spotify、HBO Max、Hulu、Paramount+、Peacock、Viu、Abema、巴哈动画疯、B站港澳台，以及 ChatGPT / Claude / Gemini。
+#!author=许舟
+#!category=网络
+#!icon=lock.open.fill
+#!arguments=策略组:填写策略组名,平台:填写要测的平台
+#!arguments-desc=【策略组】\n填要测的组名或节点名，多个用竖线 | 分隔。\n例：美国|日本|中国台湾|中国香港\n留空则只测 FINAL 那条兜底组。\n\n【平台】\n留空 = 十六个平台全测。\n只想看几个就用逗号分隔，例：netflix,disney,chatgpt\n\n可用简写：\nnetflix / nf / 网飞 / 奈飞\ndisney / 迪士尼\nyoutube / yt / 油管\nprime / 亚马逊\nspotify / sp / 声田\nhbo / max\nhulu / hu\nparamount / pm / 派拉蒙\npeacock / pc / 孔雀\nviu\nabema / ab\nbahamut / 巴哈 / 动画疯\nbili / b站 / 哔哩哔哩\nchatgpt / gpt / openai\nclaude / 克劳德\ngemini / 谷歌\nai = 上面三个 AI 一起测
+
+[Panel]
+流媒体解锁 = title="流媒体解锁",content="正在逐个平台实测…\n\n十六家平台各发一次真实请求，一般 3 秒出结果。\n点右上角的刷新按钮可以立即重测。",style=info,script-name=流媒体解锁,update-interval=1800
+
+[Script]
+流媒体解锁 = type=generic,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/streaming-panel-v13.js,script-update-interval=86400,argument="{{{策略组}}}||{{{平台}}}",timeout=120
