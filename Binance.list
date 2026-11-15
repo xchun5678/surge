@@ -1,0 +1,25 @@
+# Binance 分流（自维护版）
+# 核心域名据用户 Surge 实时请求核对（2026-11-15）：币安 App 实际连接 binance.com / binance.info / bnbstatic.com
+# 官方生态域名为公开服务域名；其余并入 blackmatrix7/ios_rule_script 的 Binance.list（2025-06-06 版）中未重复的部分
+
+# 核心（App 实测）
+DOMAIN-SUFFIX,binance.com
+DOMAIN-SUFFIX,binance.info
+DOMAIN-SUFFIX,bnbstatic.com
+
+# 官方生态（行情数据 / BNB Chain）
+DOMAIN-SUFFIX,binance.vision
+DOMAIN-SUFFIX,bnbchain.org
+DOMAIN-SUFFIX,binance.org
+
+# blackmatrix7 原表其余部分（云服务 / 合作平台等）
+DOMAIN-SUFFIX,appsflayer.com
+DOMAIN-SUFFIX,binance.cloud
+DOMAIN-SUFFIX,binance.me
+DOMAIN-SUFFIX,binancecnt.com
+DOMAIN-SUFFIX,binancefuture.com
+DOMAIN-SUFFIX,bnappzh.co
+DOMAIN-SUFFIX,bnbzh.ac
+DOMAIN-SUFFIX,bntrace.com
+DOMAIN-SUFFIX,saasexch.cc
+DOMAIN-SUFFIX,saasexch.com
