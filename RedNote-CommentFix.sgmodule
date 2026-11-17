@@ -1,0 +1,12 @@
+#!name=小红书评论实况去水印补丁（自制）
+#!desc=只补原版缺的一块：评论列表登记原流（_16），评论下载时把服务器给的 _7 水印流换成原流；并顺手做评论 red_id 改名。只挂评论两个接口，不碰笔记图片保存。需与原版模块（水印拦截法）同时启用。
+#!author=xchun5678
+#!homepage=https://github.com/xchun5678/surge
+#!category=自制
+
+[Script]
+RN-cmt-list = type=http-response, pattern=^https:\\/\\/edith\\.rnote\\.com\\/api\\/sns\\/v5\\/note\\/comment\\/list, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-comment-fix.js, requires-body=true, tag=评论媒体登记原流
+RN-cmt-dl = type=http-response, pattern=^https:\\/\\/edith\\.rnote\\.com\\/api\\/sns\\/v1\\/interaction\\/comment\\/video\\/download, script-path=https://raw.githubusercontent.com/xchun5678/surge/main/rednote-comment-fix.js, requires-body=true, tag=评论下载换原流
+
+[MITM]
+hostname = %APPEND% edith.rnote.com
