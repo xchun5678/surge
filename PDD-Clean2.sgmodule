@@ -1,0 +1,18 @@
+#!name=拼多多去广告（自制版）
+#!desc=自制版 v2：只删广告字段，不给功能接口喂空响应、不拦截遥测域名；任何异常原样放行，避免旧版模块的重试死循环与限速。装前请先停用/删除 atopsecret 的旧版「拼多多去广告」，勿双开。
+#!category=去广告
+#!tag=去广告,拼多多,pdd
+#!homepage=https://github.com/xchun5678/surge
+
+[Rule]
+DOMAIN,promotion-2.pddpic.com,REJECT
+
+[Map Local]
+^https?://api\.(pinduoduo|yangkeduo)\.com(?::[0-9]+)?/api/cappuccino/splash(?:[/?]|$) data-type=base64 data="e30=" status-code=200 header="Content-Type:application/json"
+^https?://m\.pinduoduo\.net(?::[0-9]+)?/vlayer_tab_popup\.html(?:\?|$) data-type=base64 data="PCFET0NUWVBFIGh0bWw+PGh0bWw+PGJvZHk+PC9ib2R5PjwvaHRtbD4=" status-code=200 header="Content-Type:text/html; charset=utf-8"
+
+[Script]
+拼多多净化 = type=http-response,pattern=^https?://[^/]+/(?:api/(?:alexa/homepage/hub|philo/personal/hub|oak/integration/render|aristotle/order_list_v4)|order/|search)(?:[/?]|$),requires-body=true,max-size=131072,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/pdd-clean2.js
+
+[MITM]
+hostname = %APPEND% api.pinduoduo.com, api.yangkeduo.com, m.pinduoduo.net
