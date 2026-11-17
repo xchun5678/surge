@@ -1,0 +1,8 @@
+#!name=银行跳过代理（自制版）
+#!desc=自制版 v1：把各银行域名加入 skip-proxy，让银行 App 的流量不经过代理层、检测不到代理。与 mieqq 的 Skip Proxy 模块并存（那个还管其他 App），两边都是 %APPEND% 不冲突。
+#!category=实用工具
+#!tag=银行,skip-proxy
+#!homepage=https://github.com/xchun5678/surge
+
+[General]
+skip-proxy = %APPEND% *.bochk.com,*.ncb.com.hk,*.chiyu.com.hk,*.boclife.com.hk,*.hsbc.com.hk,*.hangseng.com,*.sc.com,*.hkbea.com,*.citibank.com.hk,*.dbs.com.hk,*.icbcasia.com,*.za.bank,*.boc.cn,*.icbc.com.cn,*.ccb.com,*.abcchina.com,*.abcchina.com.cn,*.abchina.com.cn,*.bankcomm.com,*.cmbchina.com,*.psbc.com,*.citicbank.com,*.cebbank.com,*.spdb.com.cn,*.cmbc.com.cn,*.cib.com.cn,*.pingan.com,*.hxb.com.cn,*.cgbchina.com.cn,*.bankofbeijing.com.cn,*.bankofshanghai.com,*.jsbchina.cn,*.nbcb.com.cn,*.webank.com,*.unionpay.com
