@@ -1,0 +1,17 @@
+#!name=IP 纯净度检测（融合版）
+#!desc=mickeu 的 IP 纯净度检测（Scamalytics 真实评分+多源兜底）融合 IPPure 的显示层：IP 打码、图标 shield.lefthalf.filled、IP 行带 IPv4/IPv6 标签。脚本自托管在自己的仓库。
+#!author=mickeu（融合版改自其 IP-Quality，显示层借 vfelix7 的 IPPure）
+#!category=网络检测
+#!icon=https://raw.githubusercontent.com/Limexm/ClashXiOn/master/icons/Checkmark.png
+#!homepage=https://github.com/mickeu/surge
+#!arguments=GROUP:Proxy,SCAMUSER:选填,SCAMKEY:选填,MARK:true
+#!arguments-desc=\n📌 参数说明\n\n1️⃣ GROUP 策略组名称（默认 PROXY）\n输入目标策略组名（如 PROXY、AIGC、Netflix 等），所有 IP 检测域名走你填的策略组\n\n2️⃣ SCAMUSER Scamalytics 用户名（选填）\n注册 scamalytics.com 时用的用户名/账号\n填了才启用真实评分，不填则用 ip-api 估算\n\n3️⃣ SCAMKEY Scamalytics API Key（选填）\n填了启用真实评分（Fraud Score + 黑名单 + 代理/VPN 检测），不填则用 ip-api 估算\n\n4️⃣ MARK IP 打码（默认 true）\n照 IPPure：true 时面板只显示打码 IP（如 209.33.••.85），想看完整 IP 改成 false\n\n📝 如何获取免费 API Key\n注册页：https://scamalytics.com/ip/api/signup?monthly_api_calls=5000\n免费 5000 次/月，填名字、邮箱、公司（随便填），选 5000 那档\n提交后人工审核（24小时内发 API Key 到邮箱），拿到后填进 SCAMUSER 和 SCAMKEY\n\n⚠️ 参数传入说明\n四个参数会以 & 连接传入脚本（group=xxx&user=xxx&key=xxx&mark=xxx），脚本按 & 拆分解析。填完后必须 reload（Surge 配置→Reload Profile）让脚本重新加载参数；否则面板仍用旧参数。
+
+[Rule]
+RULE-SET,https://raw.githubusercontent.com/mickeu/surge/main/Rulesets/IPCheck.list,{{{GROUP}}}
+
+[Script]
+IP-Quality = type=generic,timeout=20,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/IP-Quality-Fusion.js,script-update-interval=86400,argument=group={{{GROUP}}}&user={{{SCAMUSER}}}&key={{{SCAMKEY}}}&mark={{{MARK}}}
+
+[Panel]
+IP-Quality = script-name=IP-Quality,title="IP 纯净度",content="点击刷新",style=info,update-interval=0
