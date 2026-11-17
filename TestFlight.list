@@ -1,0 +1,5 @@
+# TestFlight 规则（自维护）
+# 来源：blackmatrix7/ios_rule_script 的 TestFlight.list（2025-06-06 版，共 3 条）
+DOMAIN,testflight.apple.com
+DOMAIN,beta.apple.com
+DOMAIN-KEYWORD,testflight
