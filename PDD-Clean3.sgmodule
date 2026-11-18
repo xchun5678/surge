@@ -1,0 +1,20 @@
+#!name=拼多多去广告（自制版）
+#!desc=自制版 v3：修偶发失灵——脚本体积上限提到 1MB（大响应不再被跳过）、API 域名禁 QUIC 强制回落 HTTPS（QUIC 流量脚本处理不到）、开屏拦截兼容裸 IP、标签过滤放宽不再被单个异常项整份绕过。仍只删广告字段、不喂空响应、不拦遥测；装前请停用 v2，勿双开。
+#!category=去广告
+#!tag=去广告,拼多多,pdd
+#!homepage=https://github.com/xchun5678/surge
+
+[Rule]
+DOMAIN,promotion-2.pddpic.com,REJECT
+AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,pinduoduo.com)),REJECT
+AND,((PROTOCOL,QUIC), (DOMAIN-SUFFIX,yangkeduo.com)),REJECT
+
+[Map Local]
+^https?://[^/]+/api/cappuccino/splash(?:[/?]|$) data-type=base64 data="e30=" status-code=200 header="Content-Type:application/json"
+^https?://m\.pinduoduo\.net(?::[0-9]+)?/vlayer_tab_popup\.html(?:\?|$) data-type=base64 data="PCFET0NUWVBFIGh0bWw+PGh0bWw+PGJvZHk+PC9ib2R5PjwvaHRtbD4=" status-code=200 header="Content-Type:text/html; charset=utf-8"
+
+[Script]
+拼多多净化 = type=http-response,pattern=^https?://[^/]+/(?:api/(?:alexa/homepage/hub|philo/personal/hub|oak/integration/render|aristotle/order_list_v4)|order/|search)(?:[/?]|$),requires-body=true,max-size=1048576,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/pdd-clean3.js
+
+[MITM]
+hostname = %APPEND% api.pinduoduo.com, api.yangkeduo.com, m.pinduoduo.net
