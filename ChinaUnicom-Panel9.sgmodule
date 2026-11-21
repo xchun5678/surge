@@ -1,0 +1,21 @@
+#!name=中国联通（Surge 面板版）
+#!desc=话费 / 流量 / 语音余量面板 + 登录捕获 + 会话保活（v8：架构按中国移动版重排）。打开中国联通 App 余量页，或微信「中国联通」小程序的余量查询页查询一次即可自动捕获；App 响应与查询响应里的 Set-Cookie 会滚动合并保鲜，会话越用越久；保活每 20 分钟自动查询，连续鉴权失败会提醒打开 App 恢复登录。基于 iBL3ND 的 Egern 版（moyuzaime/egern ChinaUnicom）适配，数据层与 v7 一致、已有数据无缝接续。脚本自托管在自己的仓库。v9：日均可用单独一行。
+#!author=xchun5678（Surge 适配） / 原作 iBL3ND
+#!category=网络
+#!icon=antenna.radiowaves.left.and.right
+#!homepage=https://github.com/moyuzaime/egern/tree/main/ChinaUnicom
+#!arguments=cuCapture:true,cuCaptureNotice:true,cuPlanNotice:true,cuMiniCapture:true,cuGeneralFlow:true,cuDirectionalFlow:true,cuDebug:false
+#!arguments-desc=\n📌 参数说明\n\n1️⃣ cuCapture 中国联通数据抓取（默认 true）\n监听联通 App 请求（m.client.10010.com）；关闭后 App 侧不写入任何数据\n\n2️⃣ cuCaptureNotice 数据捕获成功通知（默认 true）\n捕获到 App 登录信息或小程序套餐数据时发送通知\n\n3️⃣ cuPlanNotice 套餐查询成功通知（默认 true）\n联通接口成功返回后通知当前话费、流量和语音余量（保活查询时不发）\n\n4️⃣ cuMiniCapture 微信小程序数据抓取（默认 true）\n监听微信「中国联通」小程序的首页接口与「余量查询」页（mina / mxx），解析通用流量、其他流量、语音及账户余额/本月消费/结转/欠费。关闭后不解析小程序响应\n\n5️⃣ cuGeneralFlow 显示通用流量（默认 true）\n流量统计包含通用流量（关闭则只统计定向流量）\n\n6️⃣ cuDirectionalFlow 显示定向流量（默认 true）\n流量统计包含定向流量，并单独显示一行定向余量（关闭则只统计通用流量）\n\n7️⃣ cuDebug 调试日志（默认 false）\n打开后会在脚本日志里打印接口响应结构与关键字段（不含手机号/票据），用于排查字段变化；平时保持关闭\n\n📝 使用方法\n装好模块后，打开中国联通 App 余量页，或在微信打开「中国联通」小程序进入余量查询页一次，收到捕获成功通知即完成；之后面板点刷新即可。保活脚本每 20 分钟自动查一次保持会话活跃。\n\n⚠️ 参数传入说明\n参数会以 & 连接传入脚本（cuCapture=true&cuPlanNotice=true&…），脚本自行解析。改完参数后必须 reload（Surge 配置→Reload Profile）让脚本重新加载。
+
+[Script]
+中国联通面板 = type=generic,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/china-unicom-panel9.js,script-update-interval=86400,timeout=30,argument=cuCapture={{{cuCapture}}}&cuPlanNotice={{{cuPlanNotice}}}&cuGeneralFlow={{{cuGeneralFlow}}}&cuDirectionalFlow={{{cuDirectionalFlow}}}&cuDebug={{{cuDebug}}}
+中国联通App捕获 = type=http-request,pattern=^https:\/\/m\.client\.10010\.com\/,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/china-unicom-panel9.js,script-update-interval=86400,timeout=10,argument=cuCapture={{{cuCapture}}}&cuCaptureNotice={{{cuCaptureNotice}}}&cuPlanNotice={{{cuPlanNotice}}}&cuDebug={{{cuDebug}}}
+中国联通App响应保鲜 = type=http-response,pattern=^https:\/\/m\.client\.10010\.com\/,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/china-unicom-panel9.js,script-update-interval=86400,timeout=10,argument=cuCapture={{{cuCapture}}}&cuDebug={{{cuDebug}}}
+中国联通小程序解析 = type=http-response,pattern=^https:\/\/(mina\.10010\.com\/wxapplet\/weixinNew\/|mxx\.client\.10010\.com\/(?:servicequerybusiness|servicebusiness)\/),requires-body=true,script-path=https://raw.githubusercontent.com/xchun5678/surge/main/china-unicom-panel9.js,script-update-interval=86400,timeout=10,argument=cuMiniCapture={{{cuMiniCapture}}}&cuCaptureNotice={{{cuCaptureNotice}}}&cuDebug={{{cuDebug}}}
+中国联通保活 = type=cron,cronexp="*/20 * * * *",script-path=https://raw.githubusercontent.com/xchun5678/surge/main/china-unicom-panel9.js,script-update-interval=86400,timeout=60,argument=CU_KEEPALIVE=true&cuCapture={{{cuCapture}}}&cuDebug={{{cuDebug}}}
+
+[Panel]
+中国联通 = script-name=中国联通面板,title="中国联通",content="点击刷新",style=info,icon=antenna.radiowaves.left.and.right,icon-color=#E60012,update-interval=0
+
+[MITM]
+hostname = %APPEND% m.client.10010.com, mina.10010.com, mxx.client.10010.com
