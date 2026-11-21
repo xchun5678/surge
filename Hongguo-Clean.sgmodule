@@ -1,0 +1,185 @@
+#!name=红果短剧去广告（自制版）
+#!desc=自制版：基于许舟（zhiaon）原版 V1.3 自托管锁定，内容与原版一致，不随上游自动更新。原版 V1.3 已移除第⑧段 6 条共享电商拦截，ecombdimg 等与抖音商城共用域不再拦截。原版说明：V1.3：移除第⑧段6条共享电商拦截，避免误伤抖音商城；保留红果专属、广告 SDK 与素材拦截。V1.2 新增红果专属广告域（hongguoapp / hongguosdk / hongguo.ad）、穿山甲 SDK 直连域（pangolin-sdk-toutiao、ad.pangolin.cn）、联盟 SDK 关键字 ad-union-sdk、字节兜底 be-pack 与 tnc.snssdk；刻意不写 zijieapi 整域拦截，避免连带 api5-normal 业务接口。纯域名层去广告，不需要 MITM 与证书。
+#!author=许舟
+#!version=1.3
+#!category=去广告
+#!icon=https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/df/05/06/df050609-8be3-0daf-d35b-f29a143d0677/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/120x120bb.jpg
+#!openUrl=https://apps.apple.com/cn/app/id6451407032
+#!tag=去广告,红果短剧,短剧,字节
+#!homepage=https://github.com/zhiaon/Modules
+# ============================================================
+# 红果短剧（com.phoenix.video / hongguoduanju.com）去广告模块
+#
+# 分三层，顺序不能乱，Surge 是「先命中先定」：
+#   ① 正片保护例外 → 广告视频子域必须先于正片整域 DIRECT
+#   ② 广告域名 → 域名家族一次性覆盖，不追可变 CDN IP
+#   ③ URL 层 → 直播拉流广告的域名藏在路径里，域名规则看不见
+#
+# 为什么不整域拦 qznovelvod / fqnovel / byteimg / douyinpic：
+#   广告素材与正片、图床共用这些域，一刀切会直接白屏、不能播放。
+#   广告视频是 v*-reading-ad，正片是 v*-reading-video，一字之差。
+# ============================================================
+
+[Rule]
+# ============ ① 广告视频 / 广告素材（必须排在下面正片 DIRECT 之前）============
+# 剧集之间的贴片、插屏广告视频。正片走 v*-reading-video，是不同子域。
+DOMAIN-WILDCARD,v*-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,v*-bd-daily-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,v*-se-daily-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,v*-se-sjy-daily-reading-ad.qznovelvod.com,REJECT,extended-matching,pre-matching
+# 广告图片签名：-ad-sign 是广告，-novel-sign 是正片签名，不要混
+DOMAIN-WILDCARD,p*-ad-sign.byteimg.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,p*-mgsdk-sign.byteimg.com,REJECT,extended-matching,pre-matching
+# 小游戏 / 广告素材平台（实测单次拉数 MB）
+DOMAIN-WILDCARD,p*-luckycat*.byteimg.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,p*-developer-sign.bytemaimg.com,REJECT,extended-matching,pre-matching
+# 抖音图片由主配置放行，避免误伤评论头像。
+
+# ============ ② 正片与功能保护（DIRECT 不支持 pre-matching）============
+DOMAIN-SUFFIX,qznovelvod.com,DIRECT,extended-matching
+DOMAIN-WILDCARD,*-novel-sign.byteimg.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,byteimg.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,fqnovelpic.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,fqnovelstatic.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,douyinvod.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,idouyinvod.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,douyinpic.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,douyinstatic.com,DIRECT,extended-matching
+DOMAIN-SUFFIX,bytegecko.com,DIRECT,extended-matching
+# amemv 不写整域 DIRECT：会压掉「番茄小说去广告」的 -misc-lf.amemv.com / applog-lf.amemv.com
+# 埋点拦截（同开两个模块时实测被抢）。红果播放不走 amemv，交给主配置 Direct 规则集即可。
+DOMAIN-SUFFIX,hongguoduanju.com,DIRECT,extended-matching
+# 番茄/红果共用的业务 API：只放 apiN-normal 正式环境，埋点不在这里
+DOMAIN-WILDCARD,api*-normal.fqnovel.com,DIRECT,extended-matching
+DOMAIN-WILDCARD,api*-normal-*.fqnovel.com,DIRECT,extended-matching
+
+# ============ ③ 穿山甲 / Pangle 广告 SDK ============
+# 一条 pangolin 家族关键词覆盖 sdk / dsp / api-access / log-api 全部子域
+DOMAIN-KEYWORD,pangolin,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,pglstatp-toutiao,REJECT,extended-matching,pre-matching
+# 补充：SDK 直连入口与联盟接口（原 pangolin 关键词不含 toutiao 后缀这族）
+DOMAIN-SUFFIX,pangolin-sdk-toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,pangle.io,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad.pangle.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad.pangolin.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,i18n-pglstatp.com,REJECT,extended-matching,pre-matching
+# 联盟 SDK 通用关键字（广告位请求都在这个路径下）
+DOMAIN-KEYWORD,ad-union-sdk,REJECT,extended-matching,pre-matching
+
+# ============ ③b 红果自身广告域（App 专属，不影响正片 CDN）============
+DOMAIN-SUFFIX,hongguoapp.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,hongguosdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,hongguo.ad,REJECT,extended-matching,pre-matching
+
+# ============ ④ 字节广告投放 / 小游戏广告位 ============
+DOMAIN-WILDCARD,ads*-normal.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,ads*-normal-*.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,minigame*-normal.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,minigame*-normal-*.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ads.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ad.toutiao.com,REJECT,extended-matching,pre-matching
+DOMAIN-KEYWORD,live-player-log.zijieapi.com,REJECT,extended-matching,pre-matching
+# 兜底关键词：只匹配带 be-pack 字样的子域，不碰 api*/mon* 业务域
+DOMAIN-KEYWORD,be-pack,REJECT,extended-matching,pre-matching
+# 注意：不写 DOMAIN-SUFFIX,zijieapi.com —— 该域下还有 api5-normal / mon 等
+# 红果业务与埋点接口，整域拦会让首页与播放一起失败。
+
+# ============ ⑤ 广告位调度 TNC（决定这个位置放哪条广告）============
+DOMAIN-WILDCARD,tnc*-alisc*.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,tnc*-aliec*.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,tnc*-bjlgy*.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,tnc*-alisc*.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,tnc*-aliec*.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,tnc*-bjlgy*.bytedance.com,REJECT,extended-matching,pre-matching
+# 补充：tnc.snssdk.com 字面写法（主配置 TikTok 规则集会先命中，
+# 模块内 pre-matching 会排在它之前，所以这里写上才能真拦住）
+DOMAIN,tnc.snssdk.com,REJECT,extended-matching,pre-matching
+
+# ============ ⑥ 广告弹窗 / 落地页 / 激励视频 ============
+DOMAIN,zlink.ugsdk.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,praisewindow.ugsdk.cn,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,chengzijianzhan.com,REJECT,extended-matching,pre-matching
+DOMAIN,activity-ag.awemeughun.com,REJECT,extended-matching,pre-matching
+DOMAIN,dig.bdurl.net,REJECT,extended-matching,pre-matching
+DOMAIN,dig.zjurl.cn,REJECT,extended-matching,pre-matching
+DOMAIN,sf3-ttcdn-tos.pstatp.com,REJECT,extended-matching,pre-matching
+DOMAIN,l2-toutiao-quic-ipv6-ml.gslb.ksyuncdn.com,REJECT,extended-matching,pre-matching
+
+# ============ ⑦ 直播带货卡片信令（卡片数据的下发口）============
+DOMAIN-WILDCARD,webcast*-open*.douyin.com,REJECT,extended-matching,pre-matching
+# 连 CNAME 真身一起封，否则回源又通
+DOMAIN-WILDCARD,webcast*-open*.cdnbuild.net,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,webcast*-open*.cdn.dsa.cdnbuild.net,REJECT,extended-matching,pre-matching
+
+# ============ ⑧ 共享电商接口与商品资源 ============
+# V1.3：这些域与抖音商城共用，不再拦截，交由主配置分流。
+# 红果专属、广告 SDK 与明确广告素材规则仍保留。
+
+# ============ ⑨ 随机子域广告 CDN（伪装域名，实抓确认）============
+DOMAIN-SUFFIX,comfylink.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ndcpp.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,ydycdn.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,qrstuvwxyzab.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,wuchuyun.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,xinqiucc.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,jomoxc.com,REJECT,extended-matching,pre-matching
+DOMAIN-SUFFIX,wmzfylgdsz.com,REJECT,extended-matching,pre-matching
+
+# ============ ⑩ 埋点 / 上报（不影响播放；金币异常时先注释本段）============
+DOMAIN,mon.toutiaocloud.net,REJECT,extended-matching,pre-matching
+DOMAIN,mon.toutiaocloud.com,REJECT,extended-matching,pre-matching
+DOMAIN,mon.zijieapi.com,REJECT,extended-matching,pre-matching
+DOMAIN,applog.zijieapi.com,REJECT,extended-matching,pre-matching
+# i.snssdk.com / is.snssdk.com 家族不碰：一是风控（is）二是归因（i），
+# 且「番茄小说去广告」模块已把这族显式 DIRECT，同开两个模块时这里再拦会互相打架，
+# 金币/签到类入口实测会卡。真需要拦再单独取消注释。
+#DOMAIN,i.snssdk.com,REJECT,extended-matching,pre-matching
+#DOMAIN,i-lq.snssdk.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,log*-applog*.fqnovel.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,rtlog*-applog*.fqnovel.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,mon*-misc*.fqnovel.com,REJECT,extended-matching,pre-matching
+DOMAIN-WILDCARD,log*-misc*.fqnovel.com,REJECT,extended-matching,pre-matching
+
+[URL Rewrite]
+# ⚠️ 本节不是分流规则。分流（谁走 DIRECT、谁被 REJECT）全部在 [Rule]，见 §2.2.3。
+# 这里只保留「域名层面看不见、只有路径里才写着 ad」的极少数兜底，且默认全注释。
+#
+# 为什么默认全注释：
+#   1) URL Rewrite 只在 HTTP 引擎求值，https 必须开 MITM 才可见；
+#   2) 本模块刻意不带 [MITM]（红果 API 走 TTNet Cronet，只认平台信任库，
+#      用户 CA 必被拒，硬上 MITM 的结局是红果打不开 / 一直转圈）；
+#   3) 既然不带 MITM，写了也等于没写，留着生效行只会让请求记录里出现
+#      「规则名不是你写的分流规则」的假象，排查时误导人。
+# 结论：广告主力拦截 100% 由 [Rule] 承担。以下开关只在你自己加了 MITM 之后才有意义。
+#
+# 开屏 / 活动素材包下发（需 MITM）
+#^https?:\/\/gurd\.snssdk\.com\/src\/server\/v\d\/package - reject
+# 穿山甲广告接口（需 MITM）
+#^https?:\/\/[^\/]*pangolin[^\/]*\/api\/ad\/ - reject
+# 直播带货广告拉流：广告音视频走「裸 IP + 明文 HTTP + 域名藏在路径」，
+# 三形态都抓到过（/third/ 与 /stage/ 路径都出现过，flv 与 qN 线路都有）。
+# 纯 HTTP 不需要 MITM，开了立刻真生效；代价是抖音系全部直播一起断（同源）。
+#^https?:\/\/(?:[^\/]+\/)?pull-(?:flv|hls|q)[^\/]*\.douyincdn\.com\/ - reject
+# 注意：显式不含 pull-lls*（推送长连接），拦了会丢消息。
+
+[Host]
+# ⚠️ 本节不是分流规则，分流决定权全在 [Rule]（见 §2.2.3 约定）。
+# 这里只是 DNS 层兜底：本地权威应答 127.0.0.1，先于规则引擎求值，
+# 用来防「主配置的 DOMAIN-SET / RULE-SET 抢先放行」。
+# 铁律：本节每一条都必须在 [Rule] 里有对应的 REJECT，否则就是拿 Host 代替分流，禁止。
+ads3-normal-lf.zijieapi.com = 127.0.0.1
+ads3-normal-hl.zijieapi.com = 127.0.0.1
+ads3-normal-lq.zijieapi.com = 127.0.0.1
+ads5-normal-lf.zijieapi.com = 127.0.0.1
+ads5-normal-hl.zijieapi.com = 127.0.0.1
+ads5-normal-lq.zijieapi.com = 127.0.0.1
+webcast-open.douyin.com = 127.0.0.1
+content-open.douyin.com = 127.0.0.1
+zlink.ugsdk.cn = 127.0.0.1
+praisewindow.ugsdk.cn = 127.0.0.1
+dig.bdurl.net = 127.0.0.1
+activity-ag.awemeughun.com = 127.0.0.1
+# V1.2 新增：与 [Rule] 中 hongguoapp / hongguosdk / hongguo.ad 的 REJECT 一一对应
+hongguoapp.com = 127.0.0.1
+hongguosdk.com = 127.0.0.1
