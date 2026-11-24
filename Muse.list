@@ -3,8 +3,10 @@
 # SOURCE: 初版从 ddgksf2013 Ai.yaml 提取（https://ddgksf2013.top/filter/Ai.yaml）
 # UPDATED: 2026-11-09 补入 meta.ai 后端域名——据用户 Surge 实时请求核对，
 #          Muse App 实际在连 hatch-api.meta.ai / graph.meta.ai / meta.graph.meta.com
+#          2026-11-24 补入 metaaivm.com——与 Tartarus2014 Muse.lsr 比对后用户点选补入
 DOMAIN-SUFFIX,muse.ai
 DOMAIN-SUFFIX,meta.ai
+DOMAIN-SUFFIX,metaaivm.com
 DOMAIN,production.museai.com
 DOMAIN,meta.graph.meta.com
 DOMAIN,connect.facebook.net
